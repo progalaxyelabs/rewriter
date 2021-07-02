@@ -6,19 +6,19 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('welcome_message');
+		return view('home_index');
 	}
 	public function rewriter()
 	{
-		return view('rewriter.php');
+		return view('home_index.php');
 	}
-	public function rewriter1()
+	public function create_form()
 	{
-		return view('create_form.php');
+		return view('home_create_form.php');
 	}
-	public function create_textbox()
+	public function template()
 	{
-		return view('create_textbox.php');
+		return view('template.php');
 	}
 
 
