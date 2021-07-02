@@ -12,3 +12,8 @@ a {
     margin-left:100px;
     width:200px;
 }
+.buttons a {
+    display: block;
+    width: 300px;
+    margin: 10px auto;
+}
