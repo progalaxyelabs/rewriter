@@ -12,7 +12,7 @@ a {
     margin-left:100px;
     width:200px;
 }
-.buttons a {
+.buttons button {
     display: block;
     width: 300px;
     margin: 10px auto;

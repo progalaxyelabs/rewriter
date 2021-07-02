@@ -9,35 +9,36 @@
             <iframe id="frame" class="embed-responsive-item" src=""></iframe>
             
             <div class="buttons">
-                <a href="" id="a1" class="btn btn-primary">Create Textbox</a>
+                <button type="button" id="create-textbox" class="btn btn-primary" >Create Textbox</button>
                 
-                <a href="" class="btn btn-primary">Create Password</a>
+                <button type="button" class="btn btn-primary">Create Password</button>
                 
-                <a href="" class="btn btn-primary">Create Button</a>
+                <button type="button" class="btn btn-primary">Create Button</button>
                 
-                <a href="" class="btn btn-primary">Create Checkbox</a>
+                <button type="button" class="btn btn-primary">Create Checkbox</button>
                 
-                <a href="" class="btn btn-primary">Create Link</a>
+                <button type="button" class="btn btn-primary">Create Link</button>
             </div>
                           
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="modal-dialog" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h5 class="modal-title" id="exampleModalLabel">Enter text</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <p>Some text in the modal.</p>
+            <div class="modal-body" placeholder="Textarea">
+                
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Ok</button>
             </div>
         </div>
     </div>
- </div>
+</div>
 
 <?= $this->endSection() ?>
