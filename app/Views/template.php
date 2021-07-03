@@ -15,5 +15,6 @@
 <body>
     <?= $this->renderSection('content') ?>
     <script src="/script.1.js"></script>
+    <script src="/script.2.js"></script>
 </body>
 </html>
