@@ -6,14 +6,19 @@ a {
     width:300px;
 }
 #frame {
+    position:relative;
+    left:57px;
     border:1px solid black;
 }
 #preview {
-    margin-left:100px;
+    margin-left:150px;
     width:200px;
 }
 .buttons button {
     display: block;
     width: 300px;
     margin: 10px auto;
+}
+#modal-input {
+    width:455px;
 }

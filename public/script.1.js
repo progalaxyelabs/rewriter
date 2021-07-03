@@ -1,30 +1,30 @@
-window.addEventListener('DOMContentLoaded', function (e) {
+var temp = document.getElementById("modal-input");
 
-    // Get the modal
-var modal = document.getElementById("exampleModal");
+var ok = document.getElementById("ok");
 
-// Get the button that opens the modal
-var btn = document.getElementById("create-textbox");
+var display = document.getElementById("display");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("btn-close");
+var popup = document.getElementById("exampleModalLabel");
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
+document.getElementById("create-password").onclick = function() {
+    popup.innerHTML='Passwordbox Name:';
 }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
+document.getElementById("create-button").onclick = function() {
+    popup.innerHTML='Button Name:';
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+document.getElementById("create-checkbox").onclick = function() {
+    popup.innerHTML='Checkbox Name:';
+}
+
+document.getElementById("create-link").onclick = function() {
+    popup.innerHTML='Link:';
 }
 
 
-});
+ok.onclick = function(){
+
+    alert(temp.value);    
+
+}
