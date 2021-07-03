@@ -10,11 +10,11 @@ class Home extends BaseController
 	}
 	public function create_form()
 	{
-		return view('home_create_form.php');
+		return view('home_create_form');
 	}
 	public function form()
 	{
-		return view('home_form.php');
+		return view('home_form');
 	}
 
 

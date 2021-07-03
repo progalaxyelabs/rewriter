@@ -35,6 +35,7 @@ var HomeCreateForm = function () {
 
     let bindUiActions = function () {
         console.log('HomeCreateForm module initialized');
+
         var temp = document.getElementById("modal-input");
 
         var ok = document.getElementById("ok");
@@ -73,6 +74,32 @@ var HomeCreateForm = function () {
             alert(popup.value);
 
         }
+    };
+
+    return {
+        init: init
+    };
+};
+
+
+
+var ThirdScreen = function () {
+    let isInitialized = false;
+
+    let init = function () {
+        if(isInitialized) {
+            return;
+        }
+
+        bindUiActions();
+        isInitialized = true;
+        console.log('ThirsScreen module initialized');
+    };
+
+    let bindUiActions = function() {
+
+        // scripts for third screen
+
     };
 
     return {
