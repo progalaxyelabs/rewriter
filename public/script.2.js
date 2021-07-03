@@ -23,6 +23,17 @@ window.addEventListener('DOMContentLoaded', (e) => {
 
 var HomeCreateForm = function () {
     let isInitialized = false;
+
+    let modalInput;
+    let modalOk;
+    let modal;
+    let modalInputLabel;
+    let btnCreateTextbox;
+    let btnCreatePassword;
+    let btnCreateCheckbox;
+    let btnCreateLink;
+    let btnCreateButton;
+
     let init = function () {
         if (isInitialized) {
             return;
@@ -36,44 +47,44 @@ var HomeCreateForm = function () {
     let bindUiActions = function () {
         console.log('HomeCreateForm module initialized');
 
-        var temp = document.getElementById("modal-input");
+        modal = document.getElementById('exampleModal');
 
-        var ok = document.getElementById("ok");
+        modalOk = document.getElementById('ok');
 
-        var modal = document.getElementById("exampleModal");
+        modalInput = document.getElementById('modal-input');
 
-        var display = document.getElementById("display");
+        modalInputLabel = document.getElementById('exampleModalLabel');
 
-        var popup = document.getElementById("exampleModalLabel");
+        btnCreateTextbox = document.getElementById('create-textbox');
 
-        document.getElementById("create-password").onclick = function() {
-            popup.innerHTML='Passwordbox Name:';
-        }
+        btnCreatePassword = document.getElementById('create-password');
 
-        document.getElementById("create-button").onclick = function() {
-            popup.innerHTML='Button Name:';
-        }
+        btnCreateCheckbox = document.getElementById('create-checkbox');
 
-        document.getElementById("create-checkbox").onclick = function() {
-            popup.innerHTML='Checkbox Name:';
-        }
+        btnCreateLink = document.getElementById('create-link');
 
-        document.getElementById("create-link").onclick = function() {
-            popup.innerHTML='Link:';
-        }
+        btnCreateButton = document.getElementById('create-button');
 
+        btnCreateTextbox.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'TextBox:';
+        })
 
-        ok.onclick = function(){
+        btnCreatePassword.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'Passwordbox Name:';
+        })
 
+        btnCreateButton.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'Button Name:';
+        })
 
+        btnCreateCheckbox.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'Checkbox Name:';
+        })
 
-            if( popup.value == 'Passwordbox Name:')
-            {
-                document.getElementById("username").innerHTML = temp.value;
-            }
-            alert(popup.value);
+        btnCreateLink.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'Link:';
+        })
 
-        }
     };
 
     return {
@@ -87,7 +98,7 @@ var ThirdScreen = function () {
     let isInitialized = false;
 
     let init = function () {
-        if(isInitialized) {
+        if (isInitialized) {
             return;
         }
 
@@ -96,7 +107,7 @@ var ThirdScreen = function () {
         console.log('ThirsScreen module initialized');
     };
 
-    let bindUiActions = function() {
+    let bindUiActions = function () {
 
         // scripts for third screen
 
