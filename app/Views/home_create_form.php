@@ -1,7 +1,7 @@
 <?= $this->extend('template') ?>
 
 <?= $this->section('content') ?>
-<div class="screen-js-module" data-module="HomeCreateForm"></div>
+<div class="screen-js-module" data-module="HomeCreateForm">
 <div class="container">
     <div class="row">
         <div class="col col-md-4 offset-md-4">
@@ -42,6 +42,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <?= $this->endSection() ?>

@@ -1,6 +1,8 @@
-var temp = document.getElementById("modal-input");
+/*var temp = document.getElementById("modal-input");
 
 var ok = document.getElementById("ok");
+
+var modal = document.getElementById("exampleModal");
 
 var display = document.getElementById("display");
 
@@ -25,6 +27,12 @@ document.getElementById("create-link").onclick = function() {
 
 ok.onclick = function(){
 
-    alert(temp.value);    
+    modal.style.display="none";
 
-}
+       if( popup.value == 'Passwordbox Name:')
+       {
+        document.getElementById("username").innerHTML = temp.value;
+       }
+       alert(popup.value);
+
+}*/
