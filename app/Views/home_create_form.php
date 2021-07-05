@@ -35,6 +35,7 @@
             </div>
             <div class="modal-body">
                 <input id="modal-input" type="text">
+                <input type="hidden" id="opened-by">
             </div>
             <div class="modal-footer">
                 <button id="ok" type="button" class="btn btn-primary">Ok</button>
