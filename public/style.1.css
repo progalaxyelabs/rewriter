@@ -5,14 +5,8 @@
 a {
     width:300px;
 }
-#frame {
-    position:relative;
-    left:57px;
+form {
     border:1px solid black;
-}
-#preview {
-    margin-left:150px;
-    width:200px;
 }
 .buttons button {
     display: block;

@@ -6,9 +6,9 @@
     <div class="row">
         <div class="col col-md-4 offset-md-4">
             
-            <div id="preview" class="embed-responsive embed-responsive-16by9">Preview Screen</div>
+            <div id="preview" >Preview Screen</div>
             
-            <iframe id="frame" class="embed-responsive-item" src="form"><div id="display"></div></iframe>
+            <form id="frame"></form>
             
             <div class="buttons">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="create-textbox" class="btn btn-primary" >Create Textbox</button>

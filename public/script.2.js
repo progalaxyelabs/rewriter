@@ -24,15 +24,14 @@ window.addEventListener('DOMContentLoaded', (e) => {
 var HomeCreateForm = function () {
     let isInitialized = false;
 
-    let modalInput, modalOk, modal, modalInputLabel, btnCreateTextbox, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label,modalInstance;
+    let modalInput, modalOk, modal, modalInputLabel, btnCreateTextbox, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label,modalInstance,form;
     let config = [];
-    let mymodal;
     let Opener = {
-        TEXTBOX: 'TextBox',
-        PASSWORD: 'Password',
-        BUTTON: 'Button',
-        CHECKBOX: 'Checkbox',
-        LINK: 'Link'
+        TEXTBOX: 'textBox',
+        PASSWORD: 'password',
+        BUTTON: 'button',
+        CHECKBOX: 'checkbox',
+        LINK: 'link'
     };
 
     let init = function () {
@@ -50,6 +49,7 @@ var HomeCreateForm = function () {
         btnCreateButton = document.getElementById('create-button');
         modalOpenedBy = document.getElementById('opened-by');
         modalInstance = bootstrap.Modal.getOrCreateInstance(modal);
+        form = document.getElementById('frame');
 
         bindUiActions();
 
@@ -57,42 +57,84 @@ var HomeCreateForm = function () {
     };
 
     let bindUiActions = function () {
-        console.log('HomeCreateForm module initialized');
+        //console.log('HomeCreateForm module initialized');
 
         btnCreateTextbox.addEventListener('click', function (e) {
             modalInputLabel.innerHTML = 'TextBox:';
             modalOpenedBy.value = Opener.TEXTBOX;
         })
-
         btnCreatePassword.addEventListener('click', function (e) {
             modalInputLabel.innerHTML = 'Passwordbox Name:';
             modalOpenedBy.value = Opener.PASSWORD;
         })
-
         btnCreateButton.addEventListener('click', function (e) {
             modalInputLabel.innerHTML = 'Button Name:';
             modalOpenedBy.value = Opener.BUTTON;
         })
-
         btnCreateCheckbox.addEventListener('click', function (e) {
             modalInputLabel.innerHTML = 'Checkbox Name:';
             modalOpenedBy.value = Opener.CHECKBOX;
         })
-
         btnCreateLink.addEventListener('click', function (e) {
             modalInputLabel.innerHTML = 'Link:';
             modalOpenedBy.value = Opener.LINK;
         })
-
         modalOk.addEventListener('click', function (e) {
             controlType = modalOpenedBy.value;
             label = modalInput.value;
             config.push({ controlType: controlType, label: label });
             console.log('HomeCreateForm module, on modalOk, config is');
-            console.log(config)
+            console.log(config);
+            updateForm();
             modalInstance.hide();
         })
     };
+
+    function updateForm() {
+        //for (let i = 0; i < config.length; i++) {
+            let i = (config.length)-1;
+            let c = config[i];
+            let input,label;
+            let wrapDiv = document.createElement('div');
+            if(controlType == Opener.BUTTON)
+            {   input = document.createElement('button');
+                input.innerHTML = c.label;}
+            else{
+                label = document.createElement('label');
+                label.innerHTML = c.label;
+                
+                input = document.createElement('input'); 
+            }
+            
+            let inputType;
+            switch (c.controlType) {
+                case Opener.TEXTBOX:
+                    inputType = 'text';
+                    break;
+                case Opener.PASSWORD:
+                    inputType = 'password';
+                    break;
+                case Opener.BUTTON:
+                    inputType = 'button';
+                    break;
+                case Opener.CHECKBOX:
+                    inputType = 'checkbox';
+                    break;
+                default:
+                    break;
+            }
+            input.type = inputType;
+            if(controlType == Opener.BUTTON){
+                wrapDiv.appendChild(input);
+            }
+            else{
+            wrapDiv.appendChild(label);  
+            wrapDiv.appendChild(input);
+            }
+
+            form.appendChild(wrapDiv);
+        //}
+    }
 
     return {
         init: init
@@ -111,7 +153,7 @@ var ThirdScreen = function () {
 
         bindUiActions();
         isInitialized = true;
-        console.log('ThirsScreen module initialized');
+        //console.log('ThirsScreen module initialized');
     };
 
     let bindUiActions = function () {
