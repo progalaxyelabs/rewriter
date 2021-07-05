@@ -24,20 +24,22 @@ window.addEventListener('DOMContentLoaded', (e) => {
 var HomeCreateForm = function () {
     let isInitialized = false;
 
-    let modalInput;
-    let modalOk;
-    let modal;
-    let modalInputLabel;
-    let btnCreateTextbox;
-    let btnCreatePassword;
-    let btnCreateCheckbox;
-    let btnCreateLink;
-    let btnCreateButton;
+    let modalInput,modalOk,modal,modalInputLabel,btnCreateTextbox,btnCreatePassword,btnCreateCheckbox,btnCreateLink,btnCreateButton;
+    let config = [];
 
     let init = function () {
         if (isInitialized) {
             return;
         }
+        modal = document.getElementById('exampleModal');
+        modalOk = document.getElementById('ok');
+        modalInput = document.getElementById('modal-input');
+        modalInputLabel = document.getElementById('exampleModalLabel');
+        btnCreateTextbox = document.getElementById('create-textbox');
+        btnCreatePassword = document.getElementById('create-password');
+        btnCreateCheckbox = document.getElementById('create-checkbox');
+        btnCreateLink = document.getElementById('create-link');
+        btnCreateButton = document.getElementById('create-button');
 
         bindUiActions();
 
@@ -46,24 +48,6 @@ var HomeCreateForm = function () {
 
     let bindUiActions = function () {
         console.log('HomeCreateForm module initialized');
-
-        modal = document.getElementById('exampleModal');
-
-        modalOk = document.getElementById('ok');
-
-        modalInput = document.getElementById('modal-input');
-
-        modalInputLabel = document.getElementById('exampleModalLabel');
-
-        btnCreateTextbox = document.getElementById('create-textbox');
-
-        btnCreatePassword = document.getElementById('create-password');
-
-        btnCreateCheckbox = document.getElementById('create-checkbox');
-
-        btnCreateLink = document.getElementById('create-link');
-
-        btnCreateButton = document.getElementById('create-button');
 
         btnCreateTextbox.addEventListener('click', function (e) {
             modalInputLabel.innerHTML = 'TextBox:';
@@ -85,6 +69,9 @@ var HomeCreateForm = function () {
             modalInputLabel.innerHTML = 'Link:';
         })
 
+        modalOk.addEventListener('click',function(e) {
+            config.push({controlType: 'textbox', label: 'User entered value'});
+        })
     };
 
     return {
