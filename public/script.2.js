@@ -82,18 +82,17 @@ var HomeCreateForm = function () {
         modalOk.addEventListener('click', function (e) {
             controlType = modalOpenedBy.value;
             label = modalInput.value;
-            config.push({ controlType: controlType, label: label });
+            let c={ controlType: controlType, label: label };
+            config.push(c);
             console.log('HomeCreateForm module, on modalOk, config is');
             console.log(config);
-            updateForm();
+            addControlToForm(c);
             modalInstance.hide();
         })
     };
 
-    function updateForm() {
-        //for (let i = 0; i < config.length; i++) {
-            let i = (config.length)-1;
-            let c = config[i];
+    function addControlToForm(c) {
+        
             let input,label;
             let wrapDiv = document.createElement('div');
             if(controlType == Opener.BUTTON)
@@ -105,7 +104,6 @@ var HomeCreateForm = function () {
                 
                 input = document.createElement('input'); 
             }
-            
             let inputType;
             switch (c.controlType) {
                 case Opener.TEXTBOX:
@@ -131,9 +129,7 @@ var HomeCreateForm = function () {
             wrapDiv.appendChild(label);  
             wrapDiv.appendChild(input);
             }
-
             form.appendChild(wrapDiv);
-        //}
     }
 
     return {
