@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
 var HomeCreateForm = function () {
     let isInitialized = false;
 
-    let c , modalInput ,modalInputt ,modalOk ,modalOkk , modal, modalInputLabel, btnCreateTextbox, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label,modalInstance,form;
+    let modalInput ,modalInputt ,modalOk ,modalOkk , modal, modalInputLabel, btnCreateTextbox, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label,modalInstance,form;
     let config = [];
     let Opener = {
         TEXTBOX: 'textBox',
@@ -56,7 +56,6 @@ var HomeCreateForm = function () {
         modalInstancee = bootstrap.Modal.getOrCreateInstance(modall);
         form = document.getElementById('frame');
         modalSelect = document.getElementById('select');
-        wrapDiv = document.createElement('div');
 
         bindUiActions();
 
@@ -89,7 +88,7 @@ var HomeCreateForm = function () {
         modalOk.addEventListener('click', function (e) {
             controlType = modalOpenedBy.value;
             label = modalInput.value;
-            c={ controlType: controlType, label: label };
+            let c={ controlType: controlType, label: label };
             config.push(c);
             console.log('HomeCreateForm module, on modalOk, config is');
             console.log(config);
@@ -100,7 +99,7 @@ var HomeCreateForm = function () {
             controlType =modalOpenedBy.value;
             label = modalInputt.value;
             destination =modalSelect.value;
-            c={ controlType: controlType, label: label, destination: destination };
+            let c={ controlType: controlType, label: label, destination: destination };
             config.push(c);
             console.log('it is for link');
             console.log(config);
@@ -152,6 +151,7 @@ var HomeCreateForm = function () {
     }
     function addLink(c) {
         let input;
+        wrapDiv = document.createElement('div');
         input = document.createElement('a');
         input.innerHTML = c.destination;
 
