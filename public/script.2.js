@@ -113,7 +113,7 @@ var HomeCreateForm = function () {
     function addControlToForm(c) {
         
             let input,label;
-            
+            wrapDiv = document.createElement('div');
             if(controlType == Opener.BUTTON)
             {   input = document.createElement('button');
                 input.innerHTML = c.label;}
