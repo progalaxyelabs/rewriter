@@ -1,0 +1,10 @@
+.template-preview {
+    border: 1px solid black;
+    height: 150px;
+    padding:15px;    
+}
+
+.template-preview-name {
+    text-align: center;
+    text-decoration: none !important;
+}

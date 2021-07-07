@@ -16,6 +16,10 @@ class Home extends BaseController
 	{
 		return view('home_nav');
 	}
+	public function templates()
+	{
+		return view('home_templates');
+	}
 
 
 }
