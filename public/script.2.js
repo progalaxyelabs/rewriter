@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
 var HomeCreateForm = function () {
     let isInitialized = false;
 
-    let modalInput ,modalInputt ,modalOk ,modalOkk , modal, modalInputLabel, btnCreateTextbox, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label,modalInstance,form;
+    let modalInput ,secondModalInput ,modalOk ,secondModalOk , modal, modalInputLabel, btnCreateTextbox, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label,modalInstance,form;
     let config = [];
     let Opener = {
         TEXTBOX: 'textBox',
@@ -33,18 +33,18 @@ var HomeCreateForm = function () {
         CHECKBOX: 'checkbox',
         LINK: 'link'
     };
-    let destination,modalSelect,modall,modalInstancee;
+    let destination,modalSelect,secondmodal,secondModalInstance;
     let wrapDiv;
     let init = function () {
         if (isInitialized) {
             return;
         }
         modal = document.getElementById('exampleModal');
-        modall = document.getElementById('exampleModal1');
+        secondmodal = document.getElementById('exampleModal1');
         modalOk = document.getElementById('ok');
-        modalOkk = document.getElementById('ok1');
+        secondModalOk = document.getElementById('ok1');
         modalInput = document.getElementById('modal-input');
-        modalInputt = document.getElementById('recipient-name');
+        secondModalInput = document.getElementById('recipient-name');
         modalInputLabel = document.getElementById('exampleModalLabel');
         btnCreateTextbox = document.getElementById('create-textbox');
         btnCreatePassword = document.getElementById('create-password');
@@ -53,7 +53,7 @@ var HomeCreateForm = function () {
         btnCreateButton = document.getElementById('create-button');
         modalOpenedBy = document.getElementById('opened-by');
         modalInstance = bootstrap.Modal.getOrCreateInstance(modal);
-        modalInstancee = bootstrap.Modal.getOrCreateInstance(modall);
+        secondModalInstance = bootstrap.Modal.getOrCreateInstance(secondmodal);
         form = document.getElementById('frame');
         modalSelect = document.getElementById('select');
 
@@ -95,16 +95,16 @@ var HomeCreateForm = function () {
             addControlToForm(c);
             modalInstance.hide();
         })
-        modalOkk.addEventListener('click',function(e) {
+        secondModalOk.addEventListener('click',function(e) {
             controlType =modalOpenedBy.value;
-            label = modalInputt.value;
+            label = secondModalInput.value;
             destination =modalSelect.value;
             let c={ controlType: controlType, label: label, destination: destination };
             config.push(c);
             console.log('it is for link');
             console.log(config);
             addLink(c);
-            modalInstancee.hide();
+            secondModalInstance.hide();
 
         })
     };

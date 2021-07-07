@@ -12,9 +12,9 @@ class Home extends BaseController
 	{
 		return view('home_create_form');
 	}
-	public function form()
+	public function Nav()
 	{
-		return view('home_form');
+		return view('home_nav');
 	}
 
 
