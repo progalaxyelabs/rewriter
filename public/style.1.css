@@ -13,3 +13,14 @@ a {
     width: 300px;
     margin: 10px auto;
 }
+.buttons {
+    display: block;
+    width: 300px;
+    margin: 10px auto;
+}
+#template-screen {
+    display: block;
+    width: 400px;
+    text-align: center;
+    margin: 10px auto;
+}
