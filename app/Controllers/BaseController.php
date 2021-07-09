@@ -39,6 +39,17 @@ class BaseController extends Controller
 	protected $helpers = [];
 
 	/**
+	 *
+	 * @var \CodeIgniter\Database\MySQLi\Connection
+	 */
+	protected $db;
+
+	/**
+	 * @var \CodeIgniter\Session\Session
+	 */
+	protected $session;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param RequestInterface  $request
@@ -54,5 +65,8 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.: $this->session = \Config\Services::session();
+
+		$this->db = \Config\Database::connect('default');
+		$this->session = \Config\Services::session();
 	}
 }
