@@ -1,7 +1,7 @@
-<?= $this->extend('template') ?>
+<?= $this->extend('templates') ?>
 
 <?= $this->section('content') ?>
-<div class="container">
+    <div class="container">
        <div class="row">
            <div class="col col-md-3 offset-md-5">
                <a href="/home/create_form" id="a" role="button" onclick="create()" class="btn btn-primary">Create Form</a>

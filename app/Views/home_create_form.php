@@ -1,4 +1,4 @@
-<?= $this->extend('template') ?>
+<?= $this->extend('templates') ?>
 
 <?= $this->section('content') ?>
 <div class="screen-js-module" data-module="HomeCreateForm">

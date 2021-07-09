@@ -4,7 +4,8 @@
     padding:15px;    
 }
 
-.template-preview-name {
+.template-preview-link {
     text-align: center;
-    text-decoration: none !important;
+    text-decoration: none ;
+    color: black;
 }

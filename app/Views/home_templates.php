@@ -49,7 +49,7 @@
 						<h5 class="modal-title" id="exampleModalLabel">New Template</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-					<form method="post" action="new_templates">
+					<form method="post" action="new_template_submit">
 						<div class="modal-body">
 							<label for="modal">Name:</label>
 							<input class="form-control" id="modalinput" type="text" name="fname">
@@ -65,32 +65,16 @@
 
 		<div class="container">
 			<div class="row">
+			<?php foreach ($templates as $template) : ?>
 				<div class="col-6 col-sm-4 col-md-3 col-lg-2">
-					<a class="template-preview-link" href="/home/template">
-					<div class="template-preview"></div>
-					<div class="template-preview-name">
-						Grocery Store
-					</div>
+					<a class="template-preview-link" href="/home/templates?id=<?= $template->id ?>">
+						<div class="template-preview"></div>
+						<div class="template-preview-name">
+							<?= $template->name ?>
+						</div>
 					</a>
 				</div>
-
-				<div class="col-6 col-sm-4 col-md-3 col-lg-2">
-					<a class="template-preview-link" href="/home/template">
-					<div class="template-preview"></div>
-					<div class="template-preview-name">
-						Restaurant
-					</div>
-					</a>
-				</div>
-
-				<div class="col-6 col-sm-4 col-md-3 col-lg-2">
-					<a class="template-preview-link" href="/home/template">
-					<div class="template-preview"></div>
-					<div class="template-preview-name">
-						Function Hall
-					</div>
-					</a>
-				</div>
+			<?php endforeach; ?>
 			</div>
 		</div>
 

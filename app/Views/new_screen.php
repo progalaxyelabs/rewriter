@@ -1,4 +1,4 @@
-<?= $this->extend('template') ?>
+<?= $this->extend('templates') ?>
 
 <?= $this->section('content') ?>
 
@@ -36,5 +36,6 @@
 		</div>
     </div>
 </div>
+<?= $this->renderSection('content') ?>
    
 <?= $this->endSection() ?>
