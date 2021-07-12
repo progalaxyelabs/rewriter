@@ -2,13 +2,12 @@
 
 <?= $this->section('content') ?>
 
-<?php $data = $_POST["fname"];?>
 
 <div class="container">
     <div class="row">
         <div class="col col-md-4 offset-md-4">
 
-            <h3 id="template-screen">Template name:<?php echo $data ?></h3>
+            <h3 id="template-screen">Template name:<?= $template->name ?></h3>
             <div class="buttons">
                 <a href="home_index" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalForNewScreen" role="button">New Screen</a>
 
