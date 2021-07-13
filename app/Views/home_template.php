@@ -10,7 +10,7 @@
             <h3 id="template-screen">Template name:<?= $template_screens[0]->template_name ?></h3>
 
             <div class="buttons">
-                <a id="new_screen_anchor" onclick="showOff()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalForNewScreen" role="button">
+                <a id="new_screen_anchor" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalForNewScreen" role="button">
                     New Screen</a>
             </div>
         </div>
