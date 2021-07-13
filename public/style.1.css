@@ -39,7 +39,7 @@
 }
 #template-screen {
     display: block;
-    width: 400px;
+    /* width: 400px; */
     text-align: center;
     margin: 10px auto;
 }
