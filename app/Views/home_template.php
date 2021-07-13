@@ -9,8 +9,6 @@
 
             <h3 id="template-screen">Template name:<?= $template_screens[0]->template_name ?></h3>
 
-            <?= $this->renderSection('content') ?>
-
             <div class="buttons">
                 <a id="new_screen_anchor" onclick="showOff()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalForNewScreen" role="button">
                     New Screen</a>
@@ -27,7 +25,7 @@
                             <div class="modal-body">
                                 <label for="modal">Name:</label>
                                 <input class="form-control" id="newScreenInput" type="text" name="screen_name">
-                                <input type="hidden" name="template_id" value="<?= $template_screens[0]->template_id ?>" >
+                                <input type="hidden" name="template_id" value="<?= $template_screens[0]->template_id ?>">
                             </div>
                             <div class="modal-footer">
                                 <button id="submit" type="submit" class="btn btn-primary">Submit</button>
@@ -37,19 +35,21 @@
                     </div>
                 </div>
             </div>
-		</div>
+        </div>
     </div>
 </div>
 
 <div class="row">
-    <?php foreach($template_screens as $screen): ?>
-        <div class="col-6 col-sm-4 col-md-3 col-lg-2 screen-link-wrap">
-            <a class="btn btn-primary" href="/home/screen?screen_id=<?= $screen->screen_id ?>">
-                <?= $screen->screen_name ?>
-            </a>
-        </div>
+    <?php foreach ($template_screens as $screen) : ?>
+        <?php if (!empty($screen->screen_id)) : ?>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 screen-link-wrap">
+                <a class="btn btn-primary" href="/home/screen?screen_id=<?= $screen->screen_id ?>">
+                    <?= $screen->screen_name ?>
+                </a>
+            </div>
+        <?php endif; ?>
     <?php endforeach; ?>
 </div>
 
-   
+
 <?= $this->endSection() ?>
