@@ -3,10 +3,15 @@
     margin-top:200px;
     width:300px;
 }*/
-#back_to_template {
+/* #back_to_template {
     margin-left: 80px;
     width:100px;
     height:80px;
+} */
+
+.screen-buttons a {
+    display: block;
+    min-height: 64px;
 }
 #home-anchor {
     margin-left:40px;

@@ -4,15 +4,22 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 offset-md-4">
+        <div class="col-md-4 offset-md-4 text-center">
 
             <h3 id="template-name">Template name:<?= $screen->template_name ?></h3>
             <h4 id="screen-name">Screen:<?= $screen->screen_name ?></h4>
 
-            <a id="back_to_template" class="btn btn-primary" href="/home/template?template_id=<?= $screen->template_id ?>">Back to Template</a>
-            <a id="create-form-link" class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#ModalForNewForm">Create Form</a>
-            <a id="create-report-link" class="btn btn-primary">Create Report</a>
-
+            <div class="row screen-buttons">
+                <div class="col">
+                    <a id="back_to_template" class="btn btn-primary" href="/home/template?template_id=<?= $screen->template_id ?>">Back to Template</a>
+                </div>
+                <div class="col">
+                    <a id="create-form-link" class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#ModalForNewForm">Create Form</a>
+                </div>
+                <div class="col">
+                    <a id="create-report-link" class="btn btn-primary">Create Report</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
