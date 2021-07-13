@@ -6,15 +6,11 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('templates');
+		return view('home_index');
 	}
 	public function create_form()
 	{
 		return view('home_create_form');
-	}
-	public function home_index()
-	{
-		return view('home_index');
 	}
 	public function all_templates()
 	{
