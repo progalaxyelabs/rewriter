@@ -23,5 +23,5 @@ create table forms (
     screen_id int not null,
     created_at datetime not null default current_timestamp(),
     last_updated_at datetime not null default current_timestamp() on update current_timestamp(),
-    primary key(id),
+    primary key(id)
 );
