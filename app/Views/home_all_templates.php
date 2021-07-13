@@ -15,7 +15,7 @@
 						<h5 class="modal-title" id="exampleModalLabel">New Template</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-					<form method="post" action="new_template_submit">
+					<form method="post" action="/home/new_template_submit">
 						<div class="modal-body">
 							<label for="modal">Name:</label>
 							<input class="form-control" id="modalinput" type="text" name="template_name">
