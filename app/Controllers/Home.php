@@ -60,11 +60,13 @@ class Home extends BaseController
 		];
 		$this->db->table('forms')->insert($form);
 		$form_id = $this->db->insertID();
+		log_message('debug', 'Home::form() - $form is ' .  print_r($form, true));
 		return redirect()->to('/home/form?form_id=' . $form_id);
 	}
 	public function screen()
 	{
 		$screen_id = filter_input(INPUT_GET, 'screen_id', FILTER_SANITIZE_STRING);
+		//$form_id = filter_input(INPUT_GET,'form_id',FILTER_SANITIZE_STRING);
 		$sql = "
 		select s.id as screen_id,
 		s.name as screen_name,
@@ -74,8 +76,11 @@ class Home extends BaseController
 		join templates t on s.template_id = t.id
 		where s.id = ?
 		";
+		$screen_forms_sql = "select * from forms where screen_id = ?";
 		$screen = $this->db->query($sql, [$screen_id])->getRow();
-		return view('home_screen', ['screen' => $screen]);
+		$screen_forms = $this->db->query($screen_forms_sql,[$screen_id])->getResult();
+		log_message('debug', '$form is ' .  print_r($screen_forms,true));
+		return view('home_screen', ['screen' => $screen,'screen_forms' => $screen_forms]);
 	}
 	public function form()
 	{
@@ -94,5 +99,11 @@ class Home extends BaseController
 		";
 		$form = $this->db->query($sql, [$form_id])->getRow();
 		return view('home_form', ['form' => $form]);
+	}
+	public function save_form()
+	{
+		$form_id = filter_input(INPUT_POST, 'form_id', FILTER_SANITIZE_STRING);
+		$config = filter_input(INPUT_POST, 'config', FILTER_SANITIZE_STRING);
+		$this->db->query('update forms set config = ? where id = ?', [$config, $form_id]);
 	}
 }

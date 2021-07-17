@@ -20,22 +20,25 @@
                     <a id="create-report-link" class="btn btn-primary">Create Report</a>
                 </div>
             </div>
+
+            <h3 id="form_and_report">Form and Reports</h3>
+
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="ModalForNewForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalForNewForm" tabindex="-1" aria-labelledby="screenModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Form Name:</h5>
+                <h5 class="modal-title" id="screenModalLabel">Form Name:</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="post" action="/home/new_form_submit">
                 <div class="modal-body">
                     <label for="modal">Name:</label>
                     <input class="form-control" id="formNameInput" type="text" name="form_name">
-                    <input type="hidden" name="screen_id" value="<?= $form->screen_id ?>">
+                    <input type="hidden" name="screen_id" value="<?= $screen->screen_id ?>">
                 </div>
                 <div class="modal-footer">
                     <button id="submit" type="submit" class="btn btn-primary">Submit</button>
@@ -43,6 +46,18 @@
                 </div>
             </form>
         </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <?php foreach ($screen_forms as $form) : ?>
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2 screen-link-wrap">
+                    <a class="btn btn-warning" href="/home/form?form_id=<?= $form->id ?>">
+                        <?= $form->name ?>
+                    </a>
+                </div>
+        <?php endforeach; ?>
     </div>
 </div>
 

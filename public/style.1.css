@@ -1,14 +1,14 @@
-
-/*#a {
-    margin-top:200px;
-    width:300px;
-}*/
-/* #back_to_template {
-    margin-left: 80px;
-    width:100px;
-    height:80px;
-} */
-
+#formButtonBorder {
+    margin-top: 10px;
+    border: 3px solid gray;
+}
+#form_and_report {
+    margin-top: 50px;
+}
+#form_buttons button {
+    width: 200px;
+    margin:10px;
+}
 .screen-buttons a {
     display: block;
     min-height: 64px;
@@ -25,7 +25,7 @@
     width:300px;
 }
 #frame {
-    border:1px solid black;
+    margin-top: 40px;
 }
 .buttons button {
     display: block;
@@ -39,7 +39,6 @@
 }
 #template-screen {
     display: block;
-    /* width: 400px; */
     text-align: center;
     margin: 10px auto;
 }

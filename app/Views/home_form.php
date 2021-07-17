@@ -1,44 +1,133 @@
 <?= $this->extend('templates') ?>
 
 <?= $this->section('content') ?>
-<div class="container">
-    <div class="row">
-        <div class="col-md-5 offset-md-3">
-            <h3 id="template-screen">Template name:<?= $form->template_name ?></h3>
-            <h4 id="template-screen">Screen:<?= $form->screen_name ?></h4>
-            <h4 id="template-screen">Form:<?= $form->form_name ?></h4>
+
+<div class="screen-js-module" data-module="HomeCreateForm">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4 text-center">
+
+                <h3 id="template-name">Template name:<?= $form->template_name ?></h3>
+                <h4 id="screen-name">Screen:<?= $form->screen_name ?></h4>
+                <h4 id="screen-name">Form:<?= $form->form_name ?></h4>
 
 
+                <div class="row screen-buttons">
+                    <div class="col">
+                        <a id="back_to_template" class="btn btn-primary"
+                            href="/home/screen?screen_id=<?= $form->screen_id ?>">Back to screen</a>
+                    </div>
+                    <div class="col"></div>
+                    <div class="col">
+                        <a id="save-form" class="btn btn-primary" role="button">Save Form</a>
+                        <input type="hidden" id="form-id" value="<?= $form->form_id ?>" />
+                    </div>
+                </div>
+            </div>
 
-            <a id="back_to_template" class="btn btn-primary" href="/home/template?template_id=<?= $form->template_id ?>">Back to Template</a>
+            <div id="formButtonBorder" class="col-md-8 offset-md-2 text-center">
+                <div id="create_buttons" class="row screen-buttons">
 
-            <a id="home-anchor" role="button" onclick="create()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalForNewScreen">Create Form</a>
+                    <div id="form_buttons" class="col">
+                        <button id="date" class="btn btn-primary" role="button">Date</button>
+                    </div>
+                    <div id="form_buttons" class="col">
+                        <button id="name" class="btn btn-primary" role="button">Name</button>
+                    </div>
+                    <div id="form_buttons" class="col">
+                        <button id="email" class="btn btn-primary" role="button">Email</button>
+                    </div>
+                    <div id="form_buttons" class="col">
+                        <button id="go_to_screen" class="btn btn-primary" role="button">Go to screen</button>
+                    </div>
+                    <div id="form_buttons" class="col">
+                        <button id="options" class="btn btn-primary" role="button">Options</button>
+                    </div>
+                    <div id="form_buttons" class="col">
+                        <button id="create-password" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"
+                            class="btn btn-primary">Password</button>
+                    </div>
+                    <div id="form_buttons" class="col">
+                        <button id="create-checkbox" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"
+                            class="btn btn-primary">Tick Box</button>
+                    </div>
+                    <div id="form_buttons" class="col">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="create-textbox"
+                            class="btn btn-primary">Long Textbox</button>
+                    </div>
+                    <div id="form_buttons" class="col">
+                        <button id="create-button" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"
+                            class="btn btn-primary">Button</button>
+                    </div>
+                    <div id="form_buttons" class="col">
+                        <button id="create-link" data-bs-toggle="modal" data-bs-target="#exampleModal1" type="button"
+                            class="btn btn-primary">Link</button>
+                    </div>
 
-            <a id="home-anchor" class="btn btn-primary">Create Report</a>
+                </div>
+            </div>
+        </div>
 
-            <div class="modal fade" id="ModalForNewScreen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Form Name:</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form method="post" action="/home/new_form_submit">
-                            <div class="modal-body">
-                                <label for="modal">Name:</label>
-                                <input class="form-control" id="formNameInput" type="text" name="form_name">
-                                <input type="hidden" name="screen_id" value="<?= $form->screen_id ?>" >
-                            </div>
-                            <div class="modal-footer">
-                                <button id="submit" type="submit" class="btn btn-primary">Submit</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            </div>
-                        </form>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="homeFormModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="homeFormModalLabel">TextBox Name</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input id="modal-input" type="text" class="form-control">
+                        <input type="hidden" id="opened-by">
+                    </div>
+                    <div class="modal-footer">
+                        <button id="ok" type="button" class="btn btn-primary">Ok</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="homeFormModalLabel1"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="homeFormModalLabel1">Link:</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Link Text:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group"><br>
+                            <label for="select" class="col-form-label">Select screen to link to</label><br>
+                            <select id="select">
+                                <option value="0">Select:</option>
+                                <option value="Forget password">Forget password</option>
+                                <option value="Home">Home</option>
+                                <option value="SignIn">SignIn</option>
+                                <option value="Settings">Settings</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="ok1" type="button" class="btn btn-primary">Ok</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <form id="frame"></form>
     </div>
+
+
 </div>
 
 <?= $this->endSection() ?>

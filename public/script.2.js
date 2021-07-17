@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
 var HomeCreateForm = function () {
     let isInitialized = false;
 
-    let modalInput ,secondModalInput ,modalOk ,secondModalOk , modal, modalInputLabel, btnCreateTextbox, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label,modalInstance,form;
+    let modalInput, secondModalInput, modalOk, secondModalOk, modal, modalInputLabel, btnCreateTextbox, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label, modalInstance, form;
     let config = [];
     let Opener = {
         TEXTBOX: 'textBox',
@@ -33,8 +33,9 @@ var HomeCreateForm = function () {
         CHECKBOX: 'checkbox',
         LINK: 'link'
     };
-    let destination,modalSelect,secondmodal,secondModalInstance;
-    let wrapDiv;
+    let destination, modalSelect, secondmodal, secondModalInstance;
+    let wrapDiv, saveForm;
+    let formId;
     let init = function () {
         if (isInitialized) {
             return;
@@ -56,6 +57,8 @@ var HomeCreateForm = function () {
         secondModalInstance = bootstrap.Modal.getOrCreateInstance(secondmodal);
         form = document.getElementById('frame');
         modalSelect = document.getElementById('select');
+        saveForm = document.getElementById('save-form');
+        formId = document.getElementById('form-id').value;
 
         bindUiActions();
 
@@ -88,67 +91,106 @@ var HomeCreateForm = function () {
         modalOk.addEventListener('click', function (e) {
             controlType = modalOpenedBy.value;
             label = modalInput.value;
-            let c={ controlType: controlType, label: label };
-            config.push(c);
-            console.log('HomeCreateForm module, on modalOk, config is');
-            console.log(config);
+            let c = { controlType: controlType, label: label };
             addControlToForm(c);
             modalInstance.hide();
         })
-        secondModalOk.addEventListener('click',function(e) {
-            controlType =modalOpenedBy.value;
+        secondModalOk.addEventListener('click', function (e) {
+            controlType = modalOpenedBy.value;
             label = secondModalInput.value;
-            destination =modalSelect.value;
-            let c={ controlType: controlType, label: label, destination: destination };
-            config.push(c);
-            console.log('it is for link');
-            console.log(config);
-            addLink(c);
+            destination = modalSelect.value;
+            let c = { controlType: controlType, label: label, destination: destination };
+            addControlToForm(c);
             secondModalInstance.hide();
 
         })
+        saveForm.addEventListener('click', function (e) {
+            new httpRequest('/home/save_form',{form_id: formId, config: config})
+                .then(function (response) {
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        })
     };
 
-    function addControlToForm(c) {
-        
-            let input,label;
-            wrapDiv = document.createElement('div');
-            if(controlType == Opener.BUTTON)
-            {   input = document.createElement('button');
-                input.innerHTML = c.label;}
-            else{
-                label = document.createElement('label');
-                label.innerHTML = c.label;
-                
-                input = document.createElement('input'); 
-            }
-            let inputType;
+    var controlBuilder = (function () {
+        let build = function (c) {
             switch (c.controlType) {
                 case Opener.TEXTBOX:
-                    inputType = 'text';
-                    break;
                 case Opener.PASSWORD:
-                    inputType = 'password';
-                    break;
-                case Opener.BUTTON:
-                    inputType = 'button';
-                    break;
                 case Opener.CHECKBOX:
-                    inputType = 'checkbox';
-                    break;
+                    return buildInputControl(c)
+                case Opener.LINK:
+                case Opener.BUTTON:
+                    return buildLinkControl(c)
                 default:
-                    break;
+                    return null
             }
-            input.type = inputType;
-            if(controlType == Opener.BUTTON){
-                wrapDiv.appendChild(input);
-            }
-            else{
-            wrapDiv.appendChild(label);  
-            wrapDiv.appendChild(input);
-            }
-            form.appendChild(wrapDiv);
+        }
+    
+        let buildInputControl = function (c) {
+    
+        }
+    
+        let buildLinkControl = function (c) {
+    
+        }
+    
+        return { build: build }
+    })()
+
+    function buildFormDefinition() {
+        let controls = [
+            { tag: 'input', type: 'password', label: 'Password' },
+            { tag: 'input', type: 'email', label: 'Email' }
+        ]
+        
     }
+
+    function addControlToForm(c) {
+
+        let input, label;
+        wrapDiv = document.createElement('div');
+        if (controlType == Opener.BUTTON) {
+            input = document.createElement('button');
+            input.innerHTML = c.label;
+        }
+        else {
+            label = document.createElement('label');
+            label.innerHTML = c.label;
+
+            input = document.createElement('input');
+        }
+        let inputType;
+        switch (c.controlType) {
+            case Opener.TEXTBOX:
+                inputType = 'text';
+                break;
+            case Opener.PASSWORD:
+                inputType = 'password';
+                break;
+            case Opener.BUTTON:
+                inputType = 'button';
+                break;
+            case Opener.CHECKBOX:
+                inputType = 'checkbox';
+                break;
+            default:
+                break;
+        }
+        input.type = inputType;
+        if (controlType == Opener.BUTTON) {
+            wrapDiv.appendChild(input);
+        }
+        else {
+            wrapDiv.appendChild(label);
+            wrapDiv.appendChild(input);
+        }
+        form.appendChild(wrapDiv);
+    }
+
     function addLink(c) {
         let input;
         wrapDiv = document.createElement('div');
