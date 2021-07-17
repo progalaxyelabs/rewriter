@@ -1,3 +1,30 @@
+var httpRequest = function (url, data, headers) {
+    return new Promise((resolve, reject) => {
+        var handleResponse = () => {
+            try {
+                if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                    if (httpRequest.status === 200) {
+                        resolve(req.response)
+                    } else {
+                        reject(req.responseText)
+                    }
+                }
+            }
+            catch (e) {
+                reject(e.description);
+            }
+        };
+
+        let req = new XMLHttpRequest();
+        req.onreadystatechange = handleResponse
+        req.open('POST', url)
+        for (const key in headers) {
+            req.setRequestHeader(key, headers[key])
+        }
+        req.send(data)
+    })
+}
+
 window.addEventListener('DOMContentLoaded', (e) => {
     let pageModuleElements = document.querySelectorAll('.screen-js-module');
     if (!pageModuleElements) {
@@ -60,6 +87,14 @@ var HomeCreateForm = function () {
         saveForm = document.getElementById('save-form');
         formId = document.getElementById('form-id').value;
 
+        fetchFormConfig()
+            .then(() => {
+                for (c of config) {
+                    controlBuilder.build(c)
+                }
+            })
+
+
         bindUiActions();
 
         isInitialized = true;
@@ -92,7 +127,8 @@ var HomeCreateForm = function () {
             controlType = modalOpenedBy.value;
             label = modalInput.value;
             let c = { controlType: controlType, label: label };
-            addControlToForm(c);
+            config.push(c);
+            controlBuilder.build(c);
             modalInstance.hide();
         })
         secondModalOk.addEventListener('click', function (e) {
@@ -100,7 +136,8 @@ var HomeCreateForm = function () {
             label = secondModalInput.value;
             destination = modalSelect.value;
             let c = { controlType: controlType, label: label, destination: destination };
-            addControlToForm(c);
+            config.push(c);
+            controlBuilder.build(c);
             secondModalInstance.hide();
 
         })
@@ -114,6 +151,16 @@ var HomeCreateForm = function () {
                 })
         })
     };
+
+    var fetchFormConfig = function () {
+        new httpRequest('/home/form_config',{form_id: formId})
+            .then(function (response) {
+                console.log('response from /home/form_config', response)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+     }
 
     var controlBuilder = (function () {
         let build = function (c) {
@@ -131,77 +178,62 @@ var HomeCreateForm = function () {
         }
     
         let buildInputControl = function (c) {
+            let input, label;
+            wrapDiv = document.createElement('div');
+            if (controlType == Opener.BUTTON) {
+                input = document.createElement('button');
+                input.innerHTML = c.label;
+            }
+            else {
+                label = document.createElement('label');
+                label.innerHTML = c.label;
     
+                input = document.createElement('input');
+            }
+            let inputType;
+            switch (c.controlType) {
+                case Opener.TEXTBOX:
+                    inputType = 'text';
+                    break;
+                case Opener.PASSWORD:
+                    inputType = 'password';
+                    break;
+                case Opener.BUTTON:
+                    inputType = 'button';
+                    break;
+                case Opener.CHECKBOX:
+                    inputType = 'checkbox';
+                    break;
+                default:
+                    break;
+            }
+            input.type = inputType;
+            if (controlType == Opener.BUTTON) {
+                wrapDiv.appendChild(input);
+            }
+            else {
+                wrapDiv.appendChild(label);
+                wrapDiv.appendChild(input);
+            }
+            form.appendChild(wrapDiv);
         }
     
         let buildLinkControl = function (c) {
+            let input;
+            wrapDiv = document.createElement('div');
+            input = document.createElement('a');
+            input.innerHTML = c.destination;
     
+            input.href = c.label;
+            wrapDiv.appendChild(input);
+    
+            form.appendChild(wrapDiv);
         }
     
         return { build: build }
     })()
 
-    function buildFormDefinition() {
-        let controls = [
-            { tag: 'input', type: 'password', label: 'Password' },
-            { tag: 'input', type: 'email', label: 'Email' }
-        ]
-        
-    }
-
-    function addControlToForm(c) {
-
-        let input, label;
-        wrapDiv = document.createElement('div');
-        if (controlType == Opener.BUTTON) {
-            input = document.createElement('button');
-            input.innerHTML = c.label;
-        }
-        else {
-            label = document.createElement('label');
-            label.innerHTML = c.label;
-
-            input = document.createElement('input');
-        }
-        let inputType;
-        switch (c.controlType) {
-            case Opener.TEXTBOX:
-                inputType = 'text';
-                break;
-            case Opener.PASSWORD:
-                inputType = 'password';
-                break;
-            case Opener.BUTTON:
-                inputType = 'button';
-                break;
-            case Opener.CHECKBOX:
-                inputType = 'checkbox';
-                break;
-            default:
-                break;
-        }
-        input.type = inputType;
-        if (controlType == Opener.BUTTON) {
-            wrapDiv.appendChild(input);
-        }
-        else {
-            wrapDiv.appendChild(label);
-            wrapDiv.appendChild(input);
-        }
-        form.appendChild(wrapDiv);
-    }
-
-    function addLink(c) {
-        let input;
-        wrapDiv = document.createElement('div');
-        input = document.createElement('a');
-        input.innerHTML = c.destination;
-
-        input.href = c.label;
-        wrapDiv.appendChild(input);
-
-        form.appendChild(wrapDiv);
-    }
+    
 
     return {
         init: init

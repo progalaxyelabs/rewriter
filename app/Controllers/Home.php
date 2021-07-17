@@ -106,4 +106,10 @@ class Home extends BaseController
 		$config = filter_input(INPUT_POST, 'config', FILTER_SANITIZE_STRING);
 		$this->db->query('update forms set config = ? where id = ?', [$config, $form_id]);
 	}
+	public function form_config()
+	{
+		$form_id = filter_input(INPUT_POST, 'form_id', FILTER_SANITIZE_STRING);
+		$config_row = $this->db->query('select config from forms where id = ?', [$form_id])->getRow();
+		return json_encode([ 'config' => $config_row->config ]);
+	}
 }
