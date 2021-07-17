@@ -108,8 +108,10 @@ class Home extends BaseController
 	}
 	public function form_config()
 	{
+		log_message('debug', 'Home::form_config, post data is ' . print_r($_POST, true));
 		$form_id = filter_input(INPUT_POST, 'form_id', FILTER_SANITIZE_STRING);
 		$config_row = $this->db->query('select config from forms where id = ?', [$form_id])->getRow();
+		log_message('debug', 'Home::form_config, db result is ' . print_r($config_row, true));
 		return json_encode([ 'config' => $config_row->config ]);
 	}
 }

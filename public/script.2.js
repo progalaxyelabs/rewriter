@@ -21,7 +21,8 @@ var httpRequest = function (url, data, headers) {
         for (const key in headers) {
             req.setRequestHeader(key, headers[key])
         }
-        req.send(data)
+        req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        req.send((new URLSearchParams(data).toString()))
     })
 }
 
@@ -73,7 +74,7 @@ var HomeCreateForm = function () {
         secondModalOk = document.getElementById('ok1');
         modalInput = document.getElementById('modal-input');
         secondModalInput = document.getElementById('recipient-name');
-        modalInputLabel = document.getElementById('exampleModalLabel');
+        modalInputLabel = document.getElementById('homeFormModalLabel');
         btnCreateTextbox = document.getElementById('create-textbox');
         btnCreatePassword = document.getElementById('create-password');
         btnCreateCheckbox = document.getElementById('create-checkbox');
@@ -153,7 +154,7 @@ var HomeCreateForm = function () {
     };
 
     var fetchFormConfig = function () {
-        new httpRequest('/home/form_config',{form_id: formId})
+        return new httpRequest('/home/form_config',{form_id: formId})
             .then(function (response) {
                 console.log('response from /home/form_config', response)
             })
@@ -166,12 +167,15 @@ var HomeCreateForm = function () {
         let build = function (c) {
             switch (c.controlType) {
                 case Opener.TEXTBOX:
+                    return buildInputControl(c)
                 case Opener.PASSWORD:
+                    return buildInputControl(c)
                 case Opener.CHECKBOX:
                     return buildInputControl(c)
                 case Opener.LINK:
-                case Opener.BUTTON:
                     return buildLinkControl(c)
+                case Opener.BUTTON:
+                    return buildInputControl(c)
                 default:
                     return null
             }
