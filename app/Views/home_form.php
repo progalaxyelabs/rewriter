@@ -53,16 +53,12 @@
                             class="btn btn-primary">Tick Box</button>
                     </div>
                     <div id="form_buttons" class="col">
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="longtext"
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="longtextarea"
                             class="btn btn-primary">Long Textbox</button>
                     </div>
                     <div id="form_buttons" class="col">
                         <button id="create-button" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"
                             class="btn btn-primary">Button</button>
-                    </div>
-                    <div id="form_buttons" class="col">
-                        <button id="create-link" data-bs-toggle="modal" data-bs-target="#exampleModal1" type="button"
-                            class="btn btn-primary">Link</button>
                     </div>
 
                 </div>

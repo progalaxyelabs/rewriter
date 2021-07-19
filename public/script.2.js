@@ -52,7 +52,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
 var HomeCreateForm = function () {
     let isInitialized = false;
 
-    let modalInput, secondModalInput, modalOk, secondModalOk, modal, modalInputLabel, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label, modalInstance, form;
+    let modalInput, secondModalInput, modalOk, secondModalOk, modal, modalInputLabel, btnCreatePassword, btnCreateCheckbox, btnCreateButton, modalOpenedBy, controlType, label, modalInstance, form;
     let btnCreateName,btnLongTextarea, btnCreateEmail,btnCreateDate,btnGoToScreen,btnCreateOption,thirdmodal,thirdModalInstance,thirdModalOk,thirdModalInput,thirdModalInputLabel;
     let config = [];
     let Opener = {
@@ -60,9 +60,8 @@ var HomeCreateForm = function () {
         PASSWORD: 'password',
         BUTTON: 'button',
         CHECKBOX: 'checkbox',
-        LINK: 'link',
         NAME: 'name',
-        LONGTEXT: 'textarea',
+        LONGTEXT: 'text',
         DATE: 'date',
         GOTOSCREEN: 'gotoscreen',
         OPTION: 'option'
@@ -85,7 +84,7 @@ var HomeCreateForm = function () {
         thirdModalInput =document.getElementById('select-number');
         modalInputLabel = document.getElementById('homeFormModalLabel');
         thirdModalInputLabel = document.getElementById('optionLabel')
-        btnLongTextarea = document.getElementById('longtext');
+        btnLongTextarea = document.getElementById('longtextarea');
         btnCreateName = document.getElementById('name');
         btnCreateDate = document.getElementById('date');
         btnCreateEmail = document.getElementById('email');
@@ -93,7 +92,6 @@ var HomeCreateForm = function () {
         btnCreateOption = document.getElementById('options');
         btnCreatePassword = document.getElementById('create-password');
         btnCreateCheckbox = document.getElementById('create-checkbox');
-        btnCreateLink = document.getElementById('create-link');
         btnCreateButton = document.getElementById('create-button');
         modalOpenedBy = document.getElementById('opened-by');
         modalInstance = bootstrap.Modal.getOrCreateInstance(modal);
@@ -155,10 +153,6 @@ var HomeCreateForm = function () {
         btnCreateCheckbox.addEventListener('click', function (e) {
             modalInputLabel.innerHTML = 'Checkbox Name:';
             modalOpenedBy.value = Opener.CHECKBOX;
-        })
-        btnCreateLink.addEventListener('click', function (e) {
-            modalInputLabel.innerHTML = 'Link:';
-            modalOpenedBy.value = Opener.LINK;
         })
         modalOk.addEventListener('click', function (e) {
             controlType = modalOpenedBy.value;
@@ -228,8 +222,6 @@ var HomeCreateForm = function () {
                     return buildInputControl(c)
                 case Opener.CHECKBOX:
                     return buildInputControl(c)
-                case Opener.LINK:
-                    return buildLinkControl(c)
                 case Opener.BUTTON:
                     return buildInputControl(c)
                 default:
@@ -244,13 +236,13 @@ var HomeCreateForm = function () {
                 input = document.createElement('button');
                 input.innerHTML = c.label;
             }
-            if (controlType == Opener.LONGTEXT) {
+            else if (controlType == Opener.LONGTEXT) {
                 label = document.createElement('label');
                 label.innerHTML = c.label;
                 input = document.createElement('textarea');
                 
             }
-            if (controlType == Opener.OPTION) {
+            else if (controlType == Opener.OPTION) {
                 label = document.createElement('label');
                 label.innerHTML = c.label;
                 input = document.createElement('select');
@@ -268,6 +260,9 @@ var HomeCreateForm = function () {
             let inputType;
             switch (c.controlType) {
                 case Opener.NAME:
+                    inputType = 'text';
+                    break;
+                case Opener.LONGTEXT:
                     inputType = 'text';
                     break;
                 case Opener.DATE:
@@ -292,11 +287,11 @@ var HomeCreateForm = function () {
             if (controlType == Opener.BUTTON) {
                 wrapDiv.appendChild(input);
             }
-            if (controlType == Opener.LONGTEXT) {
+            else if (controlType == Opener.LONGTEXT) {
                 wrapDiv.appendChild(label);
                 wrapDiv.appendChild(input);
             }
-            if (controlType == Opener.OPTION) {
+            else if (controlType == Opener.OPTION) {
                 wrapDiv.appendChild(label);
                 wrapDiv.appendChild(input);
             }
