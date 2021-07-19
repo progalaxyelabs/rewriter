@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Libraries\FormConfig;
+
 class Home extends BaseController
 {
 	public function index()
@@ -78,9 +80,9 @@ class Home extends BaseController
 		";
 		$screen_forms_sql = "select * from forms where screen_id = ?";
 		$screen = $this->db->query($sql, [$screen_id])->getRow();
-		$screen_forms = $this->db->query($screen_forms_sql,[$screen_id])->getResult();
-		log_message('debug', '$form is ' .  print_r($screen_forms,true));
-		return view('home_screen', ['screen' => $screen,'screen_forms' => $screen_forms]);
+		$screen_forms = $this->db->query($screen_forms_sql, [$screen_id])->getResult();
+		log_message('debug', '$form is ' .  print_r($screen_forms, true));
+		return view('home_screen', ['screen' => $screen, 'screen_forms' => $screen_forms]);
 	}
 	public function form()
 	{
@@ -102,16 +104,18 @@ class Home extends BaseController
 	}
 	public function save_form()
 	{
-		$form_id = filter_input(INPUT_POST, 'form_id', FILTER_SANITIZE_STRING);
-		$config = filter_input(INPUT_POST, 'config', FILTER_SANITIZE_STRING);
-		$this->db->query('update forms set config = ? where id = ?', [$config, $form_id]);
+		$fc = FormConfig::init();
+		if ($fc->form_id) {
+			$this->db->query('update forms set config = ? where id = ?', [$fc->config, $fc->form_id]);
+		}
 	}
 	public function form_config()
 	{
-		log_message('debug', 'Home::form_config, post data is ' . print_r($_POST, true));
-		$form_id = filter_input(INPUT_POST, 'form_id', FILTER_SANITIZE_STRING);
+		$input = json_decode(file_get_contents('php://input'));
+		$form_id = $input->form_id ?? '';
+		$form_id = filter_var($form_id, FILTER_SANITIZE_STRING);
 		$config_row = $this->db->query('select config from forms where id = ?', [$form_id])->getRow();
 		log_message('debug', 'Home::form_config, db result is ' . print_r($config_row, true));
-		return json_encode([ 'config' => $config_row->config ]);
+		return json_encode(['config' => json_decode($config_row->config)]);
 	}
 }
