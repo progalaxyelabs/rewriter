@@ -53,7 +53,7 @@ var HomeCreateForm = function () {
     let isInitialized = false;
 
     let modalInput, secondModalInput, modalOk, secondModalOk, modal, modalInputLabel, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label, modalInstance, form;
-    let btnCreateName,btnLongTextarea, btnCreateEmail,btnCreateDate,btnGoToScreen,btnCreateOption,thirdmodal,thirdModalInstance,thirdModalOk,thirdModalInput,thirdModalInputLabel;
+    let btnCreateName, btnLongTextarea, btnCreateEmail, btnCreateDate, btnGoToScreen, btnCreateOption, thirdmodal, thirdModalInstance, thirdModalOk, thirdModalInput, thirdModalInputLabel;
     let config = [];
     let Opener = {
         EMAIL: 'email',
@@ -82,7 +82,7 @@ var HomeCreateForm = function () {
         thirdModalOk = document.getElementById('ok2')
         modalInput = document.getElementById('modal-input');
         secondModalInput = document.getElementById('recipient-name');
-        thirdModalInput =document.getElementById('select-number');
+        thirdModalInput = document.getElementById('select-number');
         modalInputLabel = document.getElementById('homeFormModalLabel');
         thirdModalInputLabel = document.getElementById('optionLabel')
         btnLongTextarea = document.getElementById('longtext');
@@ -207,7 +207,11 @@ var HomeCreateForm = function () {
 
                 try {
                     const r = JSON.parse(response)
-                    config = r.config
+                    if (r.config) {                        
+                        config = r.config
+                    } else {
+                        console.warn('fetchFormConfig: config is empty')
+                    }
                 } catch (e1) {
                     console.error(e1)
                 }
@@ -246,7 +250,7 @@ var HomeCreateForm = function () {
         }
 
         let buildInputControl = function (c) {
-            let input, label , option , i;
+            let input, label, option, i;
             wrapDiv = document.createElement('div');
             if (controlType == Opener.BUTTON) {
                 input = document.createElement('button');
@@ -256,15 +260,15 @@ var HomeCreateForm = function () {
                 label = document.createElement('label');
                 label.innerHTML = c.label;
                 input = document.createElement('textarea');
-                
+
             }
             if (controlType == Opener.OPTION) {
                 label = document.createElement('label');
                 label.innerHTML = c.label;
                 input = document.createElement('select');
-                for(i=0;i<thirdModalInput.value;i++) {
-                option = document.createElement('option');
-                input.appendChild(option);
+                for (i = 0; i < thirdModalInput.value; i++) {
+                    option = document.createElement('option');
+                    input.appendChild(option);
                 }
             }
             else {
