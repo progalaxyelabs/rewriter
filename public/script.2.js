@@ -52,14 +52,20 @@ window.addEventListener('DOMContentLoaded', (e) => {
 var HomeCreateForm = function () {
     let isInitialized = false;
 
-    let modalInput, secondModalInput, modalOk, secondModalOk, modal, modalInputLabel, btnCreateTextbox, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label, modalInstance, form;
+    let modalInput, secondModalInput, modalOk, secondModalOk, modal, modalInputLabel, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label, modalInstance, form;
+    let btnCreateName,btnLongTextarea, btnCreateEmail,btnCreateDate,btnGoToScreen,btnCreateOption,thirdmodal,thirdModalInstance,thirdModalOk,thirdModalInput,thirdModalInputLabel;
     let config = [];
     let Opener = {
-        TEXTBOX: 'textBox',
+        EMAIL: 'email',
         PASSWORD: 'password',
         BUTTON: 'button',
         CHECKBOX: 'checkbox',
-        LINK: 'link'
+        LINK: 'link',
+        NAME: 'name',
+        LONGTEXT: 'textarea',
+        DATE: 'date',
+        GOTOSCREEN: 'gotoscreen',
+        OPTION: 'option'
     };
     let destination, modalSelect, secondmodal, secondModalInstance;
     let wrapDiv, saveForm;
@@ -70,12 +76,21 @@ var HomeCreateForm = function () {
         }
         modal = document.getElementById('exampleModal');
         secondmodal = document.getElementById('exampleModal1');
+        thirdmodal = document.getElementById('exampleModal2')
         modalOk = document.getElementById('ok');
         secondModalOk = document.getElementById('ok1');
+        thirdModalOk = document.getElementById('ok2')
         modalInput = document.getElementById('modal-input');
         secondModalInput = document.getElementById('recipient-name');
+        thirdModalInput =document.getElementById('select-number');
         modalInputLabel = document.getElementById('homeFormModalLabel');
-        btnCreateTextbox = document.getElementById('create-textbox');
+        thirdModalInputLabel = document.getElementById('optionLabel')
+        btnLongTextarea = document.getElementById('longtext');
+        btnCreateName = document.getElementById('name');
+        btnCreateDate = document.getElementById('date');
+        btnCreateEmail = document.getElementById('email');
+        btnGoToScreen = document.getElementById('go_to_screen');
+        btnCreateOption = document.getElementById('options');
         btnCreatePassword = document.getElementById('create-password');
         btnCreateCheckbox = document.getElementById('create-checkbox');
         btnCreateLink = document.getElementById('create-link');
@@ -83,6 +98,7 @@ var HomeCreateForm = function () {
         modalOpenedBy = document.getElementById('opened-by');
         modalInstance = bootstrap.Modal.getOrCreateInstance(modal);
         secondModalInstance = bootstrap.Modal.getOrCreateInstance(secondmodal);
+        thirdModalInstance = bootstrap.Modal.getOrCreateInstance(thirdmodal);
         form = document.getElementById('frame');
         modalSelect = document.getElementById('select');
         saveForm = document.getElementById('save-form');
@@ -104,9 +120,29 @@ var HomeCreateForm = function () {
     let bindUiActions = function () {
         //console.log('HomeCreateForm module initialized');
 
-        btnCreateTextbox.addEventListener('click', function (e) {
-            modalInputLabel.innerHTML = 'TextBox:';
-            modalOpenedBy.value = Opener.TEXTBOX;
+        btnGoToScreen.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'Enter Label Name';
+            modalOpenedBy.value = Opener.GOTOSCREEN;
+        })
+        btnCreateOption.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'Enter Label Name';
+            modalOpenedBy.value = Opener.OPTION;
+        })
+        btnCreateName.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'Name:';
+            modalOpenedBy.value = Opener.NAME;
+        })
+        btnLongTextarea.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'Long Textarea';
+            modalOpenedBy.value = Opener.LONGTEXT;
+        })
+        btnCreateDate.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'Date Name:';
+            modalOpenedBy.value = Opener.DATE;
+        })
+        btnCreateEmail.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'Email label:';
+            modalOpenedBy.value = Opener.EMAIL;
         })
         btnCreatePassword.addEventListener('click', function (e) {
             modalInputLabel.innerHTML = 'Passwordbox Name:';
@@ -142,6 +178,16 @@ var HomeCreateForm = function () {
             secondModalInstance.hide();
 
         })
+        thirdModalOk.addEventListener('click', function (e) {
+            controlType = modalOpenedBy.value;
+            label = thirdModalInputLabel.value;
+            destination = modalSelect.value;
+            let c = { controlType: controlType, label: label, destination: destination };
+            config.push(c);
+            controlBuilder.build(c);
+            thirdModalInstance.hide();
+
+        })
         saveForm.addEventListener('click', function (e) {
             new httpRequest('/home/save_form',{form_id: formId, config: config})
                 .then(function (response) {
@@ -166,7 +212,17 @@ var HomeCreateForm = function () {
     var controlBuilder = (function () {
         let build = function (c) {
             switch (c.controlType) {
-                case Opener.TEXTBOX:
+                case Opener.NAME:
+                    return buildInputControl(c)
+                case Opener.DATE:
+                    return buildInputControl(c)
+                case Opener.LONGTEXT:
+                    return buildInputControl(c)
+                case Opener.EMAIL:
+                    return buildInputControl(c)
+                case Opener.GOTOSCREEN:
+                    return buildLinkControl(c)
+                case Opener.OPTION:
                     return buildInputControl(c)
                 case Opener.PASSWORD:
                     return buildInputControl(c)
@@ -182,11 +238,26 @@ var HomeCreateForm = function () {
         }
     
         let buildInputControl = function (c) {
-            let input, label;
+            let input, label , option , i;
             wrapDiv = document.createElement('div');
             if (controlType == Opener.BUTTON) {
                 input = document.createElement('button');
                 input.innerHTML = c.label;
+            }
+            if (controlType == Opener.LONGTEXT) {
+                label = document.createElement('label');
+                label.innerHTML = c.label;
+                input = document.createElement('textarea');
+                
+            }
+            if (controlType == Opener.OPTION) {
+                label = document.createElement('label');
+                label.innerHTML = c.label;
+                input = document.createElement('select');
+                for(i=0;i<thirdModalInput.value;i++) {
+                option = document.createElement('option');
+                input.appendChild(option);
+                }
             }
             else {
                 label = document.createElement('label');
@@ -196,7 +267,13 @@ var HomeCreateForm = function () {
             }
             let inputType;
             switch (c.controlType) {
-                case Opener.TEXTBOX:
+                case Opener.NAME:
+                    inputType = 'text';
+                    break;
+                case Opener.DATE:
+                    inputType = 'date';
+                    break;
+                case Opener.EMAIL:
                     inputType = 'text';
                     break;
                 case Opener.PASSWORD:
@@ -215,6 +292,15 @@ var HomeCreateForm = function () {
             if (controlType == Opener.BUTTON) {
                 wrapDiv.appendChild(input);
             }
+            if (controlType == Opener.LONGTEXT) {
+                wrapDiv.appendChild(label);
+                wrapDiv.appendChild(input);
+            }
+            if (controlType == Opener.OPTION) {
+                wrapDiv.appendChild(label);
+                wrapDiv.appendChild(input);
+            }
+
             else {
                 wrapDiv.appendChild(label);
                 wrapDiv.appendChild(input);

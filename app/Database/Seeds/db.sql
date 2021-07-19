@@ -25,3 +25,5 @@ create table forms (
     last_updated_at datetime not null default current_timestamp() on update current_timestamp(),
     primary key(id)
 );
+alter table forms
+add column config text;
