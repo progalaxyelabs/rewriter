@@ -2,8 +2,8 @@ var httpRequest = function (url, data, headers) {
     return new Promise((resolve, reject) => {
         var handleResponse = () => {
             try {
-                if (httpRequest.readyState === XMLHttpRequest.DONE) {
-                    if (httpRequest.status === 200) {
+                if (req.readyState === XMLHttpRequest.DONE) {
+                    if (req.status === 200) {
                         resolve(req.response)
                     } else {
                         reject(req.responseText)
@@ -21,8 +21,8 @@ var httpRequest = function (url, data, headers) {
         for (const key in headers) {
             req.setRequestHeader(key, headers[key])
         }
-        req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        req.send((new URLSearchParams(data).toString()))
+        req.setRequestHeader('Content-Type', 'application/json');
+        req.send(JSON.stringify(data))
     })
 }
 
@@ -183,7 +183,7 @@ var HomeCreateForm = function () {
 
         })
         saveForm.addEventListener('click', function (e) {
-            new httpRequest('/home/save_form',{form_id: formId, config: config})
+            new httpRequest('/home/save_form', { form_id: formId, config: config })
                 .then(function (response) {
 
                 })
@@ -194,14 +194,22 @@ var HomeCreateForm = function () {
     };
 
     var fetchFormConfig = function () {
-        return new httpRequest('/home/form_config',{form_id: formId})
+        config = []
+        return new httpRequest('/home/form_config', { form_id: formId })
             .then(function (response) {
                 console.log('response from /home/form_config', response)
+
+                try {
+                    const r = JSON.parse(response)
+                    config = r.config
+                } catch (e1) {
+                    console.error(e1)
+                }
             })
             .catch(function (error) {
-                console.log(error);
+                console.error(error);
             })
-     }
+    }
 
     var controlBuilder = (function () {
         let build = function (c) {
@@ -228,7 +236,7 @@ var HomeCreateForm = function () {
                     return null
             }
         }
-    
+
         let buildInputControl = function (c) {
             let input, label , option , i;
             wrapDiv = document.createElement('div');
@@ -254,7 +262,7 @@ var HomeCreateForm = function () {
             else {
                 label = document.createElement('label');
                 label.innerHTML = c.label;
-    
+
                 input = document.createElement('input');
             }
             let inputType;
@@ -302,23 +310,23 @@ var HomeCreateForm = function () {
             }
             form.appendChild(wrapDiv);
         }
-    
+
         let buildLinkControl = function (c) {
             let input;
             wrapDiv = document.createElement('div');
             input = document.createElement('a');
             input.innerHTML = c.destination;
-    
+
             input.href = c.label;
             wrapDiv.appendChild(input);
-    
+
             form.appendChild(wrapDiv);
         }
-    
+
         return { build: build }
     })()
 
-    
+
 
     return {
         init: init
