@@ -52,8 +52,9 @@ window.addEventListener('DOMContentLoaded', (e) => {
 var HomeCreateForm = function () {
     let isInitialized = false;
 
-    let modalInput, secondModalInput, modalOk, secondModalOk, modal, modalInputLabel, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label, modalInstance, form;
+    let modalInput, secondModalInput, modalOk, secondModalOk, modal, modalInputLabel, btnCreatePassword, btnCreateCheckbox, btnCreateButton, modalOpenedBy, controlType, label, modalInstance, form;
     let btnCreateName, btnLongTextarea, btnCreateEmail, btnCreateDate, btnGoToScreen, btnCreateOption, thirdmodal, thirdModalInstance, thirdModalOk, thirdModalInput, thirdModalInputLabel;
+    let btnCreateNumberInput;
     let config = [];
     let Opener = {
         EMAIL: 'email',
@@ -63,8 +64,9 @@ var HomeCreateForm = function () {
         NAME: 'name',
         LONGTEXT: 'text',
         DATE: 'date',
-        GOTOSCREEN: 'gotoscreen',
-        OPTION: 'option'
+        GOTOSCREEN: 'link',
+        OPTION: 'option',
+        NUMBER: 'number'
     };
     let destination, modalSelect, secondmodal, secondModalInstance;
     let wrapDiv, saveForm;
@@ -83,7 +85,8 @@ var HomeCreateForm = function () {
         secondModalInput = document.getElementById('recipient-name');
         thirdModalInput = document.getElementById('select-number');
         modalInputLabel = document.getElementById('homeFormModalLabel');
-        thirdModalInputLabel = document.getElementById('optionLabel')
+        thirdModalInputLabel = document.getElementById('optionLabel');
+        btnCreateNumberInput = document.getElementById('number-input');
         btnLongTextarea = document.getElementById('longtextarea');
         btnCreateName = document.getElementById('name');
         btnCreateDate = document.getElementById('date');
@@ -130,8 +133,12 @@ var HomeCreateForm = function () {
             modalInputLabel.innerHTML = 'Name:';
             modalOpenedBy.value = Opener.NAME;
         })
+        btnCreateNumberInput.addEventListener('click', function (e) {
+            modalInputLabel.innerHTML = 'Number Input Label';
+            modalOpenedBy.value = Opener.NUMBER;
+        })
         btnLongTextarea.addEventListener('click', function (e) {
-            modalInputLabel.innerHTML = 'Long Textarea';
+            modalInputLabel.innerHTML = 'TextBox';
             modalOpenedBy.value = Opener.LONGTEXT;
         })
         btnCreateDate.addEventListener('click', function (e) {
@@ -201,7 +208,7 @@ var HomeCreateForm = function () {
 
                 try {
                     const r = JSON.parse(response)
-                    if (r.config) {                        
+                    if (r.config) {
                         config = r.config
                     } else {
                         console.warn('fetchFormConfig: config is empty')
@@ -230,6 +237,8 @@ var HomeCreateForm = function () {
                     return buildLinkControl(c)
                 case Opener.OPTION:
                     return buildInputControl(c)
+                case Opener.NUMBER:
+                    return buildInputControl(c)
                 case Opener.PASSWORD:
                     return buildInputControl(c)
                 case Opener.CHECKBOX:
@@ -244,15 +253,17 @@ var HomeCreateForm = function () {
         let buildInputControl = function (c) {
             let input, label, option, i;
             wrapDiv = document.createElement('div');
+            wrapDiv.className = 'form application-form col col-sm-10 col-md-8 my-3';
             if (controlType == Opener.BUTTON) {
                 input = document.createElement('button');
                 input.innerHTML = c.label;
+                input.className = 'btn btn-primary';
             }
             else if (controlType == Opener.LONGTEXT) {
                 label = document.createElement('label');
                 label.innerHTML = c.label;
                 input = document.createElement('textarea');
-
+                input.className = 'form-control';
             }
             else if (controlType == Opener.OPTION) {
                 label = document.createElement('label');
@@ -263,11 +274,19 @@ var HomeCreateForm = function () {
                     input.appendChild(option);
                 }
             }
+            else if (controlType == Opener.CHECKBOX) {
+                label = document.createElement('label');
+                label.innerHTML = c.label;
+
+                input = document.createElement('input');
+            }
             else {
                 label = document.createElement('label');
                 label.innerHTML = c.label;
 
                 input = document.createElement('input');
+                input.className = 'form-control';
+
             }
             let inputType;
             switch (c.controlType) {
@@ -282,6 +301,9 @@ var HomeCreateForm = function () {
                     break;
                 case Opener.EMAIL:
                     inputType = 'text';
+                    break;
+                case Opener.NUMBER:
+                    inputType = 'number';
                     break;
                 case Opener.PASSWORD:
                     inputType = 'password';

@@ -36,6 +36,9 @@
                         <button id="name" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Name</button>
                     </div>
                     <div id="form_buttons" class="col">
+                        <button id="number-input" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Numbers input</button>
+                    </div>
+                    <div id="form_buttons" class="col">
                         <button id="email" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Email</button>
                     </div>
                     <div id="form_buttons" class="col">
@@ -54,7 +57,7 @@
                     </div>
                     <div id="form_buttons" class="col">
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="longtextarea"
-                            class="btn btn-primary">Long Textbox</button>
+                            class="btn btn-primary">TextBox</button>
                     </div>
                     <div id="form_buttons" class="col">
                         <button id="create-button" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"
@@ -149,7 +152,9 @@
             </div>
         </div>
 
-        <form id="frame"></form>
+        <div class="application-form-wrap row justify-content-center">
+        <form id="frame" class="form application-form col col-sm-10 col-md-8 my-3"></form>
+        </div>
     </div>
 
 
