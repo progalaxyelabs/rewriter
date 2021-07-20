@@ -1,26 +1,28 @@
 var httpRequest = function (url, data, headers) {
     return new Promise((resolve, reject) => {
-        var handleResponse = () => {
-            try {
-                if (req.readyState === XMLHttpRequest.DONE) {
-                    if (req.status === 200) {
-                        resolve(req.response)
-                    } else {
-                        reject(req.responseText)
-                    }
-                }
-            }
-            catch (e) {
-                reject(e.description);
-            }
-        };
-
         let req = new XMLHttpRequest();
-        req.onreadystatechange = handleResponse
+        req.addEventListener('load', (e) => {
+            if (req.status !== 200) {
+                console.error(req.responseText)
+                resolve({})
+                return
+            }
+
+            let response
+            try {
+                response = JSON.parse(req.response)
+            } catch (ex) {
+                console.error(ex)
+                response = {}
+            }
+            resolve(response)
+        })
+        req.addEventListener('error', (e) => {
+            console.error(e.description)
+            resolve({})
+        })
         req.open('POST', url)
-        for (const key in headers) {
-            req.setRequestHeader(key, headers[key])
-        }
+        for (const key in headers) { req.setRequestHeader(key, headers[key]) }
         req.setRequestHeader('Content-Type', 'application/json');
         req.send(JSON.stringify(data))
     })
@@ -190,36 +192,15 @@ var HomeCreateForm = function () {
 
         })
         saveForm.addEventListener('click', function (e) {
-            new httpRequest('/home/save_form', { form_id: formId, config: config })
-                .then(function (response) {
-
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
+            httpRequest('/home/save_form', { form_id: formId, config: config })
+                .then((res) => { console.log(res) })
         })
     };
 
     var fetchFormConfig = function () {
         config = []
-        return new httpRequest('/home/form_config', { form_id: formId })
-            .then(function (response) {
-                console.log('response from /home/form_config', response)
-
-                try {
-                    const r = JSON.parse(response)
-                    if (r.config) {
-                        config = r.config
-                    } else {
-                        console.warn('fetchFormConfig: config is empty')
-                    }
-                } catch (e1) {
-                    console.error(e1)
-                }
-            })
-            .catch(function (error) {
-                console.error(error);
-            })
+        return httpRequest('/home/form_config', { form_id: formId })
+            .then((res) => { config = res.config ? res.config : [] })
     }
 
     var controlBuilder = (function () {
