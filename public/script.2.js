@@ -52,8 +52,8 @@ window.addEventListener('DOMContentLoaded', (e) => {
 var HomeCreateForm = function () {
     let isInitialized = false;
 
-    let modalInput, secondModalInput, modalOk, secondModalOk, modal, modalInputLabel, btnCreatePassword, btnCreateCheckbox, btnCreateButton, modalOpenedBy, controlType, label, modalInstance, form;
-    let btnCreateName,btnLongTextarea, btnCreateEmail,btnCreateDate,btnGoToScreen,btnCreateOption,thirdmodal,thirdModalInstance,thirdModalOk,thirdModalInput,thirdModalInputLabel;
+    let modalInput, secondModalInput, modalOk, secondModalOk, modal, modalInputLabel, btnCreatePassword, btnCreateCheckbox, btnCreateLink, btnCreateButton, modalOpenedBy, controlType, label, modalInstance, form;
+    let btnCreateName, btnLongTextarea, btnCreateEmail, btnCreateDate, btnGoToScreen, btnCreateOption, thirdmodal, thirdModalInstance, thirdModalOk, thirdModalInput, thirdModalInputLabel;
     let config = [];
     let Opener = {
         EMAIL: 'email',
