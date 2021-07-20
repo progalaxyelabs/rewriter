@@ -108,6 +108,8 @@ class Home extends BaseController
 		if ($fc->form_id) {
 			$this->db->query('update forms set config = ? where id = ?', [$fc->config, $fc->form_id]);
 		}
+		$result = ['status' => 'ok'];
+		return $this->response->setJSON($result);
 	}
 	public function form_config()
 	{
@@ -116,6 +118,8 @@ class Home extends BaseController
 		$form_id = filter_var($form_id, FILTER_SANITIZE_STRING);
 		$config_row = $this->db->query('select config from forms where id = ?', [$form_id])->getRow();
 		log_message('debug', 'Home::form_config, db result is ' . print_r($config_row, true));
-		return json_encode(['config' => json_decode($config_row->config)]);
+		$config = json_decode($config_row->config);
+		$result = ['status' => 'ok', 'config' => $config];
+		return $this->response->setJSON($result);
 	}
 }
