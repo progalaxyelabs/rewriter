@@ -136,9 +136,13 @@
                             <input id="optionLabel" class="form-control" type="text">
                         </div>
                         <div id="optionModalBody">
-                            <label for="optionIput">Enter Option name:</label>
-                            <input id="optionInput" class="form-control" type="text">
-                            <button id="optionAddButton" class="btn btn-primary">Add</button>
+                        <label for="optionIput">Enter Option Name:</label><br>
+                            <div class="input-group mb-3">
+                                <input id="optionInput" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button id="optionAddButton" class="btn btn-outline-primary" type="button">Add</button>
+                                </div>
+                            </div>
                         </div>
                         <div id="optionModalBody1"></div>
 

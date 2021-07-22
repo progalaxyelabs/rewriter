@@ -241,7 +241,7 @@ var HomeCreateForm = function () {
         let buildInputControl = function (c) {
             let input, label, option, i;
             wrapDiv = document.createElement('div');
-            wrapDiv.className = 'form application-form col col-sm-10 col-md-8 my-3';
+            wrapDiv.className = 'form col col-sm-10 col-md-8 my-3';
             if (controlType == Opener.BUTTON) {
                 input = document.createElement('button');
                 input.innerHTML = c.label;
@@ -267,8 +267,12 @@ var HomeCreateForm = function () {
             else if (controlType == Opener.CHECKBOX) {
                 label = document.createElement('label');
                 label.innerHTML = c.label;
+                label.classList.add('form-check-label');
 
                 input = document.createElement('input');
+                input.classList.add('form-check-input');
+
+                wrapDiv.classList.add('form-check');
             }
             else {
                 label = document.createElement('label');
