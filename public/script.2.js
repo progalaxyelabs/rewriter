@@ -257,6 +257,7 @@ var HomeCreateForm = function () {
                 label = document.createElement('label');
                 label.innerHTML = c.label;
                 input = document.createElement('select');
+                input.className = 'form-select';
                 for (i = 0; i < optionInputarray.length; i++) {
                     option = document.createElement('option');
                     option.innerHTML = optionInputarray[i];
@@ -289,7 +290,7 @@ var HomeCreateForm = function () {
                     inputType = 'date';
                     break;
                 case Opener.EMAIL:
-                    inputType = 'text';
+                    inputType = 'email';
                     break;
                 case Opener.NUMBER:
                     inputType = 'number';
@@ -318,7 +319,10 @@ var HomeCreateForm = function () {
                 wrapDiv.appendChild(label);
                 wrapDiv.appendChild(input);
             }
-
+            else if (controlType == Opener.CHECKBOX) {
+                wrapDiv.appendChild(input);
+                wrapDiv.appendChild(label);
+            }
             else {
                 wrapDiv.appendChild(label);
                 wrapDiv.appendChild(input);

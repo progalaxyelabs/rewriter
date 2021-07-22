@@ -36,13 +36,13 @@
                         <button id="name" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Name</button>
                     </div>
                     <div id="form_buttons" class="col">
-                        <button id="number-input" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Numbers input</button>
+                        <button id="number-input" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Mobile number</button>
                     </div>
                     <div id="form_buttons" class="col">
                         <button id="email" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Email</button>
                     </div>
                     <div id="form_buttons" class="col">
-                        <button id="go_to_screen" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1" type="button">Go to screen</button>
+                        <button id="go_to_screen" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1" type="button">Go to link</button>
                     </div>
                     <div id="form_buttons" class="col">
                         <button id="options" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" type="button">Options</button>
@@ -152,8 +152,8 @@
             </div>
         </div>
 
-        <div class="application-form-wrap row justify-content-center">
-        <form id="frame" class="form application-form col col-sm-10 col-md-8 my-3"></form>
+        <div class="wrap row justify-content-center">
+        <form id="frame" class="form col col-sm-10 col-md-8 my-3"></form>
         </div>
     </div>
 
