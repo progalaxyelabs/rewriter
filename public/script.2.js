@@ -56,7 +56,7 @@ var HomeCreateForm = function () {
 
     let modalInput, secondModalInput, modalOk, secondModalOk, modal, modalInputLabel, btnCreatePassword, btnCreateCheckbox, btnCreateButton, modalOpenedBy, controlType, label, modalInstance, form;
     let btnCreateName, btnLongTextarea, btnCreateEmail, btnCreateDate, btnGoToScreen, btnCreateOption, thirdmodal, thirdModalInstance, thirdModalOk, thirdModalInput, thirdModalInputLabel;
-    let btnCreateNumberInput;
+    let btnCreateNumberInput, optionAddButton , optionInputarray = [] ,optionInput;
     let config = [];
     let Opener = {
         EMAIL: 'email',
@@ -106,6 +106,9 @@ var HomeCreateForm = function () {
         modalSelect = document.getElementById('select');
         saveForm = document.getElementById('save-form');
         formId = document.getElementById('form-id').value;
+        optionAddButton = document.getElementById('optionAddButton');
+        optionInput = document.getElementById('optionInput');
+        optionBodyinput = document.getElementById('optionModalBody1');
 
         fetchFormConfig()
             .then(() => {
@@ -191,6 +194,10 @@ var HomeCreateForm = function () {
             thirdModalInstance.hide();
 
         })
+        optionAddButton.addEventListener('click',function(e) {
+            optionInputarray.push(optionInput.value);
+            optionBodyinput.innerHTML += optionInput.value + "<br>";
+        })
         saveForm.addEventListener('click', function (e) {
             httpRequest('/home/save_form', { form_id: formId, config: config })
                 .then((res) => { console.log(res) })
@@ -250,8 +257,9 @@ var HomeCreateForm = function () {
                 label = document.createElement('label');
                 label.innerHTML = c.label;
                 input = document.createElement('select');
-                for (i = 0; i < thirdModalInput.value; i++) {
+                for (i = 0; i < optionInputarray.length; i++) {
                     option = document.createElement('option');
+                    option.innerHTML = optionInputarray[i];
                     input.appendChild(option);
                 }
             }

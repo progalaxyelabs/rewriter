@@ -135,12 +135,12 @@
                             <label for="optionLabel">Enter Options Label:</label>
                             <input id="optionLabel" class="form-control" type="text">
                         </div>
-                        <div class="form-group">
-                            <label for="select-number">Select number of options</label>
-                            <input id="select-number" class="form-control" type="number">
-                            <input type="hidden" id="opened-by">
+                        <div id="optionModalBody">
+                            <label for="optionIput">Enter Option name:</label>
+                            <input id="optionInput" class="form-control" type="text">
+                            <button id="optionAddButton" class="btn btn-primary">Add</button>
                         </div>
-                        <div id="optionModalBody"></div>
+                        <div id="optionModalBody1"></div>
 
                     </div>
                     <div class="modal-footer">
