@@ -93,7 +93,7 @@ class OptionsFormControl extends BootstrapFormControl {
         for(let item in this.controlDefinition.list) {
             let option = this.createElement('option', {
                 label: item.label,
-                value= item.value
+                value: item.value
             })
             select.appendChild(option)
         }
