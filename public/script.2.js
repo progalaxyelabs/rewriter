@@ -176,8 +176,8 @@ var HomeCreateForm = function () {
         })
         secondModalOk.addEventListener('click', function (e) {
             controlType = modalOpenedBy.value;
-            label = secondModalInput.value;
-            destination = modalSelect.value;
+            label = modalSelect.value;
+            destination = secondModalInput.value;
             let c = { controlType: controlType, label: label, destination: destination };
             config.push(c);
             controlBuilder.build(c);
@@ -187,8 +187,7 @@ var HomeCreateForm = function () {
         thirdModalOk.addEventListener('click', function (e) {
             controlType = modalOpenedBy.value;
             label = thirdModalInputLabel.value;
-            destination = modalSelect.value;
-            let c = { controlType: controlType, label: label, destination: destination };
+            let c = { controlType: controlType, label: label, list: optionInputarray };
             config.push(c);
             controlBuilder.build(c);
             thirdModalInstance.hide();
@@ -211,7 +210,7 @@ var HomeCreateForm = function () {
     }
 
     var controlBuilder = (function () {
-        let build = function (c) {
+        let build_bkup = function (c) {
             switch (c.controlType) {
                 case Opener.NAME:
                     return buildInputControl(c)
@@ -235,6 +234,32 @@ var HomeCreateForm = function () {
                     return buildInputControl(c)
                 default:
                     return null
+            }
+            
+        }
+        let build = function(c) {
+            console.log(c)
+            switch (c.controlType) {
+                case Opener.NAME:
+                    return form.appendChild(new SimpleTextFormControl(c).get())
+                case Opener.OPTION:
+                    return form.appendChild(new OptionsFormControl(c).get())
+                case Opener.NUMBER:
+                    return form.appendChild(new NumberFormControl(c).get())
+                case Opener.GOTOSCREEN:
+                    return form.appendChild(new GotoScreenFormControl(c).get())
+                case Opener.BUTTON:
+                    return form.appendChild(new ButtonFormControl(c).get())
+                case Opener.EMAIL:
+                    return form.appendChild(new EmailFormControl(c).get())
+                case Opener.DATE:
+                    return form.appendChild(new DateFormControl(c).get())
+                case Opener.PASSWORD:
+                    return form.appendChild(new PasswordFormControl(c).get())
+                case Opener.CHECKBOX:
+                    return form.appendChild(new TickboxFormControl(c).get())
+                case Opener.LONGTEXT:
+                    return form.appendChild(new ParagraphFormControl(c).get())
             }
         }
 

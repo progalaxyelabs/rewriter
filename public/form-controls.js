@@ -28,14 +28,15 @@ class BaseInputFormControl extends BootstrapFormControl {
             name: this.controlDefinition.name,
             className: 'form-control'
         })
-        this.wrapDiv.appendChild(label)
-        this.wrapDiv.appendChild(input)
+        this.wrapDiv.appendChild(this.label)
+        this.wrapDiv.appendChild(this.input)
     }
 }
 
 class SimpleTextFormControl extends BaseInputFormControl {
     constructor(c) {
-        super(c)        
+        super(c)
+        this.input.type = 'text'        
     }
 }
 
@@ -68,15 +69,42 @@ class PasswordFormControl extends BaseInputFormControl {
 }
 
 class TickboxFormControl extends BootstrapFormControl {
-
+    constructor(c) {
+        super(c)
+        let label = this.getLabelElement()
+        let input = this.createElement('input',{
+            type: 'checkbox'
+        })
+    
+        this.wrapDiv.appendChild(input)
+        this.wrapDiv.appendChild(label)
+    }
 }
 
 class ParagraphFormControl extends BootstrapFormControl {
-
+    constructor(c) {
+        super(c)
+        let label = this.getLabelElement()
+        let input = this.createElement('textarea',{
+            className: 'form-control'
+        })
+        
+        this.wrapDiv.appendChild(label)
+        this.wrapDiv.appendChild(input)
+    }
 }
 
 
 class GotoScreenFormControl extends BootstrapFormControl {
+    constructor(c) {
+        super(c)
+        let input = this.createElement('a',{
+            href: this.controlDefinition.destination ,
+            innerHTML: this.controlDefinition.label
+        })
+
+        this.wrapDiv.appendChild(input)
+    }
 
 }
 
@@ -85,15 +113,12 @@ class OptionsFormControl extends BootstrapFormControl {
         super(c)
         let label = this.getLabelElement()
         let select = this.createElement('select', {
-            type: 'text', 
-            name: this.controlDefinition.name,
             className: 'form-select'
         })
         
         for(let item in this.controlDefinition.list) {
             let option = this.createElement('option', {
-                label: item.label,
-                value: item.value
+                innerHTML: this.controlDefinition.list[item]
             })
             select.appendChild(option)
         }
@@ -108,6 +133,14 @@ class MultipleChoiceFormControl extends BootstrapFormControl {
 }
 
 class ButtonFormControl extends BootstrapFormControl {
+    constructor(c) {
+        super(c)
+        let input = this.createElement('button',{
+            innerHTML: this.controlDefinition.label ,
+            className: 'btn btn-primary'
+        })
 
+        this.wrapDiv.appendChild(input)
+    }
 }
 

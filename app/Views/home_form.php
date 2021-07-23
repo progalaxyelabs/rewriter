@@ -105,9 +105,9 @@
                             <label for="select" class="col-form-label">Select screen to link to</label><br>
                             <select id="select">
                                 <option value="0">Select:</option>
-                                <option value="Forget password">Forget password</option>
+                                <option value="Forget password?">Forget password?</option>
                                 <option value="Home">Home</option>
-                                <option value="SignIn">SignIn</option>
+                                <option value="Sign Up">Sign Up</option>
                                 <option value="Settings">Settings</option>
                             </select>
                         </div>
