@@ -2,7 +2,7 @@ class BootstrapFormControl {
     constructor(c) {
         this.controlDefinition = c
         this.wrapDiv = document.createElement('div')
-        this.wrapDiv.className = 'col col-sm-10 col-md-8 my-3'        
+        this.wrapDiv.className = 'col col-sm-10 col-md-8 my-3'
     }
 
     createElement(tag, attributes) {
@@ -24,7 +24,7 @@ class BaseInputFormControl extends BootstrapFormControl {
         super(c)
         this.label = this.getLabelElement()
         this.input = this.createElement('input', {
-            type: 'text', 
+            type: 'text',
             name: this.controlDefinition.name,
             className: 'form-control'
         })
@@ -36,35 +36,35 @@ class BaseInputFormControl extends BootstrapFormControl {
 class SimpleTextFormControl extends BaseInputFormControl {
     constructor(c) {
         super(c)
-        this.input.type = 'text'        
+        this.input.type = 'text'
     }
 }
 
 class NumberFormControl extends BaseInputFormControl {
     constructor(c) {
-        super(c)  
-        this.input.type = 'number'      
+        super(c)
+        this.input.type = 'number'
     }
 }
 
 class EmailFormControl extends BaseInputFormControl {
     constructor(c) {
-        super(c)  
-        this.input.type = 'email'      
+        super(c)
+        this.input.type = 'email'
     }
 }
 
 class DateFormControl extends BaseInputFormControl {
     constructor(c) {
-        super(c)  
-        this.input.type = 'date'      
+        super(c)
+        this.input.type = 'date'
     }
 }
 
 class PasswordFormControl extends BaseInputFormControl {
     constructor(c) {
-        super(c)  
-        this.input.type = 'password'      
+        super(c)
+        this.input.type = 'password'
     }
 }
 
@@ -72,12 +72,15 @@ class TickboxFormControl extends BootstrapFormControl {
     constructor(c) {
         super(c)
         let label = this.getLabelElement()
-        let input = this.createElement('input',{
-            type: 'checkbox'
+        label.classList.add('form-check-label')
+        let input = this.createElement('input', {
+            type: 'checkbox',
+            className: 'form-check-input'
         })
-    
+
         this.wrapDiv.appendChild(input)
         this.wrapDiv.appendChild(label)
+        this.wrapDiv.classList.add('form-check')
     }
 }
 
@@ -85,10 +88,10 @@ class ParagraphFormControl extends BootstrapFormControl {
     constructor(c) {
         super(c)
         let label = this.getLabelElement()
-        let input = this.createElement('textarea',{
+        let input = this.createElement('textarea', {
             className: 'form-control'
         })
-        
+
         this.wrapDiv.appendChild(label)
         this.wrapDiv.appendChild(input)
     }
@@ -98,8 +101,8 @@ class ParagraphFormControl extends BootstrapFormControl {
 class GotoScreenFormControl extends BootstrapFormControl {
     constructor(c) {
         super(c)
-        let input = this.createElement('a',{
-            href: this.controlDefinition.destination ,
+        let input = this.createElement('a', {
+            href: this.controlDefinition.destination,
             innerHTML: this.controlDefinition.label
         })
 
@@ -115,14 +118,14 @@ class OptionsFormControl extends BootstrapFormControl {
         let select = this.createElement('select', {
             className: 'form-select'
         })
-        
-        for(let item in this.controlDefinition.list) {
+
+        for (let item in this.controlDefinition.list) {
             let option = this.createElement('option', {
                 innerHTML: this.controlDefinition.list[item]
             })
             select.appendChild(option)
         }
-        
+
         this.wrapDiv.appendChild(label)
         this.wrapDiv.appendChild(select)
     }
@@ -135,8 +138,8 @@ class MultipleChoiceFormControl extends BootstrapFormControl {
 class ButtonFormControl extends BootstrapFormControl {
     constructor(c) {
         super(c)
-        let input = this.createElement('button',{
-            innerHTML: this.controlDefinition.label ,
+        let input = this.createElement('button', {
+            innerHTML: this.controlDefinition.label,
             className: 'btn btn-primary'
         })
 
