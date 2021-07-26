@@ -16,13 +16,13 @@ create table generic_screens (
 );
 
 create table generic_forms (
-  form_id int not null auto_increment,
+  generic_form_id int not null auto_increment,
   generic_form_name varchar(20) not null,
   generic_screen_id int not null,
   config text,
   created_at datetime not null default current_timestamp(),
   last_updated_at datetime not null default current_timestamp() on update current_timestamp(),
-  primary key(generic_screen_id)
+  primary key(generic_form_id)
 );
 
 create table customers (
