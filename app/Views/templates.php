@@ -28,6 +28,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/home/all_templates" role="button">Templates</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/customers" role="button">Customers</a>
+                    </li>
                 </ul>
 
             </div>

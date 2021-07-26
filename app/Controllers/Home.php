@@ -122,4 +122,20 @@ class Home extends BaseController
 		$result = ['status' => 'ok', 'config' => $config];
 		return $this->response->setJSON($result);
 	}
+	public function customers()
+	{
+		return view('home_customers');
+	}
+	public function new_customer()
+	{
+		return view('home_new_customer');
+	}
+	public function new_customer_submit()
+	{
+		return view('customer');
+	}
+	public function customer_screen()
+	{
+		return view('customer_screen');
+	}
 }

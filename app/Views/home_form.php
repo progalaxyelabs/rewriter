@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-4 offset-md-4 text-center">
 
-                <h3 id="template-name">Template name:<?= $form->template_name ?></h3>
+                <h3 id="template-name">Name:<?= $form->template_name ?></h3>
                 <h4 id="screen-name">Screen:<?= $form->screen_name ?></h4>
                 <h4 id="screen-name">Form:<?= $form->form_name ?></h4>
 
@@ -33,10 +33,10 @@
                         <button id="date" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Date</button>
                     </div>
                     <div id="form_buttons" class="col">
-                        <button id="name" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Name</button>
+                        <button id="name" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Simple Text</button>
                     </div>
                     <div id="form_buttons" class="col">
-                        <button id="number-input" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Mobile number</button>
+                        <button id="number-input" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Number</button>
                     </div>
                     <div id="form_buttons" class="col">
                         <button id="email" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Email</button>
@@ -57,7 +57,7 @@
                     </div>
                     <div id="form_buttons" class="col">
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="longtextarea"
-                            class="btn btn-primary">TextBox</button>
+                            class="btn btn-primary">Paragraph</button>
                     </div>
                     <div id="form_buttons" class="col">
                         <button id="create-button" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"
