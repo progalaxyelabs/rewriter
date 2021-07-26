@@ -10,13 +10,8 @@
     color: black;
 }
 #temporary-customer-names {
-    background-color: rgb(240, 238, 238);
     border: 1px solid grey;
     padding: 5px;
-}
-#temporary-link {
-
+    width: 400px;
     font-size: 25px;
-    text-decoration: none;
-    color: black;
 }

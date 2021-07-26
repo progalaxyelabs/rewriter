@@ -51,23 +51,23 @@
 
 <div class="container" style="margin-top: 100px;">
     <div class="row">
-        <div id="temporary-customer-names" class="col-md-4 offset-md-4 text-center">
-            <a href="" id="temporary-link" role="button">Dashboard</a>
+        <div class="col-md-4 offset-md-4 text-center">
+            <a id="temporary-customer-names" class="btn btn-outline-secondary" href="" role="button">Dashboard</a>
         </div>
     </div>
     <div class="row">
-        <div id="temporary-customer-names" class="col-md-4 offset-md-4 text-center">
-            <a href="/home/customer_screen" id="temporary-link" role="button">Add items to menucard</a>
+        <div class="col-md-4 offset-md-4 text-center">
+            <a id="temporary-customer-names" class="btn btn-outline-secondary" href="/home/customer_screen" role="button">Add items to menucard</a>
         </div>
     </div>
     <div class="row">
-        <div id="temporary-customer-names" class="col-md-4 offset-md-4 text-center">
-            <a href="" id="temporary-link" role="button">Billing</a>
+        <div class="col-md-4 offset-md-4 text-center">
+            <a id="temporary-customer-names" class="btn btn-outline-secondary" href="" role="button">Billing</a>
         </div>
     </div>
     <div class="row">
-        <div id="temporary-customer-names" class="col-md-4 offset-md-4 text-center">
-            <a href="" id="temporary-link" role="button">Daily Report</a>
+        <div class="col-md-4 offset-md-4 text-center">
+            <a id="temporary-customer-names" class="btn btn-outline-secondary" href="" role="button">Daily Report</a>
         </div>
     </div>
 </div>
