@@ -18,7 +18,7 @@
 					<form method="post" action="/home/new_template_submit">
 						<div class="modal-body">
 							<label for="modal">Name:</label>
-							<input class="form-control" id="modalinput" type="text" name="template_name">
+							<input class="form-control" id="modalinput" type="text" name="generic_template_name">
 						</div>
 						<div class="modal-footer">
 							<button id="ok" type="submit" class="btn btn-primary">Ok</button>

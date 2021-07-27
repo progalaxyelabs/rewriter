@@ -72,18 +72,27 @@ class Queries
         where gs.generic_screen_id = ?;
     ";
 
+    const GetGenericFormsByScreenId = "
+        select 
+            generic_form_id,
+            generic_form_name,
+            generic_screen_id
+        from generic_forms
+        where generic_screen_id = ?;    
+    ";
+
     const GetGenericFormByFormId ="
-    select 
-        gf.generic_form_id,
-		gf.generic_form_name,
-		gs.generic_screen_id,
-		gs.generic_screen_name,
-		gt.generic_template_id,
-		gt.generic_template_name
+        select 
+            gf.generic_form_id,
+            gf.generic_form_name,
+            gs.generic_screen_id,
+            gs.generic_screen_name,
+            gt.generic_template_id,
+            gt.generic_template_name
 		from generic_forms gf
 		join generic_screens gs on gs.generic_screen_id = gf.generic_screen_id
 		join generic_templates gt on gt.generic_template_id = gs.generic_template_id
-		where gf.generic_form_id = ?
+		where gf.generic_form_id = ?;
 		";
 
     const InsertGenericForm = "
@@ -93,9 +102,15 @@ class Queries
         (?, ?, ?);
     ";
 
-    const UpdateGenericForm = "
+    const UpdateGenericFormConfig = "
         update generic_forms
         set config = ?
+        where generic_form_id = ?;
+    ";
+
+    const GetGenericFormConfigById = "
+        select config
+        from generic_forms
         where generic_form_id = ?;
     ";
 
@@ -115,7 +130,7 @@ class Queries
             customer_signin_name,
             customer_password
         from customers 
-        where customer_signin_name = ?
+        where customer_signin_name = ?;
     ";
 
     const GetCustomerBizById = "

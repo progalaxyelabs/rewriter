@@ -41,8 +41,8 @@
             <form method="post" action="/home/new_screen_submit">
                 <div class="modal-body">
                     <label for="modal">Name:</label>
-                    <input class="form-control" id="newScreenInput" type="text" name="screen_name">
-                    <input type="hidden" name="template_id" value="<?= $template_screens[0]->generic_template_id ?>">
+                    <input class="form-control" id="newScreenInput" type="text" name="generic_screen_name">
+                    <input type="hidden" name="generic_template_id" value="<?= $template_screens[0]->generic_template_id ?>">
                 </div>
                 <div class="modal-footer">
                     <button id="submit" type="submit" class="btn btn-primary">Submit</button>
