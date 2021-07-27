@@ -33,10 +33,10 @@
 			<div class="row">
 			<?php foreach ($templates as $template) : ?>
 				<div class="col-6 col-sm-4 col-md-3 col-lg-2">
-					<a class="template-preview-link" href="/home/template?template_id=<?= $template->id ?>">
+					<a class="template-preview-link" href="/home/template?generic_template_id=<?= $template->generic_template_id ?>">
 						<div class="template-preview"></div>
 						<div class="template-preview-name">
-							<?= $template->name ?>
+							<?= $template->generic_template_name ?>
 						</div>
 					</a>
 				</div>

@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col col-md-4 offset-md-4">
 
-            <h3 id="template-screen">Template name:<?= $template_screens[0]->template_name ?></h3>
+            <h3 id="template-screen">Template name:<?= $template_screens[0]->generic_template_name ?></h3>
 
             <div class="buttons">
                 <a id="new_screen_anchor" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalForNewScreen" role="button">
@@ -18,10 +18,10 @@
 
     <div class="row">
         <?php foreach ($template_screens as $screen) : ?>
-            <?php if (!empty($screen->screen_id)) : ?>
+            <?php if (!empty($screen->generic_screen_id)) : ?>
                 <div class="col-6 col-sm-4 col-md-3 col-lg-2 screen-link-wrap">
-                    <a class="btn btn-primary" href="/home/screen?screen_id=<?= $screen->screen_id ?>">
-                        <?= $screen->screen_name ?>
+                    <a class="btn btn-primary" href="/home/screen?generic_screen_id=<?= $screen->generic_screen_id ?>">
+                        <?= $screen->generic_screen_name ?>
                     </a>
                 </div>
             <?php endif; ?>
@@ -42,7 +42,7 @@
                 <div class="modal-body">
                     <label for="modal">Name:</label>
                     <input class="form-control" id="newScreenInput" type="text" name="screen_name">
-                    <input type="hidden" name="template_id" value="<?= $template_screens[0]->template_id ?>">
+                    <input type="hidden" name="template_id" value="<?= $template_screens[0]->generic_template_id ?>">
                 </div>
                 <div class="modal-footer">
                     <button id="submit" type="submit" class="btn btn-primary">Submit</button>

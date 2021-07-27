@@ -8,20 +8,20 @@
         <div class="row">
             <div class="col-md-4 offset-md-4 text-center">
 
-                <h3 id="template-name">Name:<?= $form->template_name ?></h3>
-                <h4 id="screen-name">Screen:<?= $form->screen_name ?></h4>
-                <h4 id="screen-name">Form:<?= $form->form_name ?></h4>
+                <h3 id="template-name">Name:<?= $form->generic_template_name ?></h3>
+                <h4 id="screen-name">Screen:<?= $form->generic_screen_name ?></h4>
+                <h4 id="screen-name">Form:<?= $form->generic_form_name ?></h4>
 
 
                 <div class="row screen-buttons">
                     <div class="col">
                         <a id="back_to_template" class="btn btn-primary"
-                            href="/home/screen?screen_id=<?= $form->screen_id ?>">Back to screen</a>
+                            href="/home/screen?generic_screen_id=<?= $form->generic_screen_id ?>">Back to screen</a>
                     </div>
                     <div class="col"></div>
                     <div class="col">
                         <a id="save-form" class="btn btn-primary" role="button">Save Form</a>
-                        <input type="hidden" id="form-id" value="<?= $form->form_id ?>" />
+                        <input type="hidden" id="form-id" value="<?= $form->generic_form_id ?>" />
                     </div>
                 </div>
             </div>

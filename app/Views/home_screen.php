@@ -6,12 +6,12 @@
     <div class="row">
         <div class="col-md-4 offset-md-4 text-center">
 
-            <h3 id="template-name">Template name:<?= $screen->template_name ?></h3>
-            <h4 id="screen-name">Screen:<?= $screen->screen_name ?></h4>
+            <h3 id="template-name">Template name:<?= $screen->generic_template_name ?></h3>
+            <h4 id="screen-name">Screen:<?= $screen->generic_screen_name ?></h4>
 
             <div class="row screen-buttons">
                 <div class="col">
-                    <a id="back_to_template" class="btn btn-primary" href="/home/template?template_id=<?= $screen->template_id ?>">Back to Template</a>
+                    <a id="back_to_template" class="btn btn-primary" href="/home/template?generic_template_id=<?= $screen->generic_template_id ?>">Back to Template</a>
                 </div>
                 <div class="col">
                     <a id="create-form-link" class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#ModalForNewForm">Create Form</a>
@@ -37,8 +37,8 @@
             <form method="post" action="/home/new_form_submit">
                 <div class="modal-body">
                     <label for="modal">Name:</label>
-                    <input class="form-control" id="formNameInput" type="text" name="form_name">
-                    <input type="hidden" name="screen_id" value="<?= $screen->screen_id ?>">
+                    <input class="form-control" id="formNameInput" type="text" name="generic_form_name">
+                    <input type="hidden" name="generic_screen_id" value="<?= $screen->generic_screen_id ?>">
                 </div>
                 <div class="modal-footer">
                     <button id="submit" type="submit" class="btn btn-primary">Submit</button>
@@ -53,8 +53,8 @@
     <div class="row">
         <?php foreach ($screen_forms as $form) : ?>
                 <div class="col-6 col-sm-4 col-md-3 col-lg-2 screen-link-wrap">
-                    <a class="btn btn-warning" href="/home/form?form_id=<?= $form->id ?>">
-                        <?= $form->name ?>
+                    <a class="btn btn-warning" href="/home/form?generic_form_id=<?= $form->generic_form_id ?>">
+                        <?= $form->generic_form_name ?>
                     </a>
                 </div>
         <?php endforeach; ?>
