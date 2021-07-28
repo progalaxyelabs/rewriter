@@ -175,7 +175,6 @@ class Home extends BaseController
 			Queries::GetGenericFormConfigById,
 			[$form_id]
 		)->getRow();
-
 		
 		$config = json_decode($config_row->config);
 		$result = ['status' => 'ok', 'config' => $config];

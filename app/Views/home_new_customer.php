@@ -36,6 +36,10 @@
             <div class="text-center" style="margin-top: 15px;">
                 <a href="/home/new_customer_submit" class="btn btn-primary" role="button">Save</a>
             </div>
+            <div style="margin-top:20px;" class="text-center">
+                <span>Existing customer? <a href="" style="text-decoration: none;">Click Here...</a></span>
+
+            </div>
         </form>
 
         </div>
