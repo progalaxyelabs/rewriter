@@ -251,6 +251,7 @@ var HomeCreateForm = function () {
 var ThirdScreen = function () {
     let isInitialized = false;
 
+
     let init = function () {
         if (isInitialized) {
             return;

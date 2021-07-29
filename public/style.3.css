@@ -54,6 +54,7 @@
     color: black;
 }
 #temporary-customer-names {
+    margin-top: 20px;
     border: 1px solid grey;
     padding: 5px;
     width: 400px;

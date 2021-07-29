@@ -23,7 +23,7 @@ class Home extends BaseController
 			Queries::GetAllGenericTemplates
 		)->getResult();
 
-		return view('home_all_templates', ['templates' => $templates],);
+		return view('home_all_templates', ['templates' => $templates]);
 	}
 
 	public function template()
@@ -200,5 +200,20 @@ class Home extends BaseController
 	public function customer_screen()
 	{
 		return view('customer_screen');
+	}
+	public function search()
+	{
+		$customer_id = filter_input(
+			INPUT_GET,
+			'customer_id',
+			FILTER_SANITIZE_STRING
+		);
+		log_message('debug', 'customer id is ' . print_r($customer_id, true));
+		$customer = $this->db->query(
+			Queries::GetCustomerById,
+			[$customer_id]
+		)->getRow();
+
+		return view('customer_search', ['customer' => $customer],);
 	}
 }
