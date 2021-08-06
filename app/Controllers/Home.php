@@ -175,10 +175,10 @@ class Home extends BaseController
 			Queries::GetGenericFormConfigById,
 			[$form_id]
 		)->getRow();
-		
+
 		$config = json_decode($config_row->config);
 		$result = ['status' => 'ok', 'config' => $config];
-		
+
 		return $this->response->setJSON($result);
 	}
 
@@ -203,12 +203,12 @@ class Home extends BaseController
 			Queries::GetCustomerBizNameByCustomerBizId,
 			[$customer_biz_id]
 		)->getRow();
-		
+
 		$templates = $this->db->query(
 			Queries::GetAllGenericTemplates
 		)->getResult();
 
-		return view('customer',[ 'templates' => $templates , 'biz' => $biz]);
+		return view('customer', ['templates' => $templates, 'biz' => $biz]);
 	}
 
 	public function customer_screen()
@@ -218,7 +218,7 @@ class Home extends BaseController
 			'customer_id',
 			FILTER_SANITIZE_STRING
 		);
-		
+
 		$biz_form = $this->db->query(
 			Queries::GetBizScreenAndFormNames
 		)->getResult();
@@ -227,7 +227,7 @@ class Home extends BaseController
 			[$biz_screen_id]
 		)->getRow();
 
-		return view('customer_screen', ['biz' => $biz ,'biz_form' => $biz_form ]);
+		return view('customer_screen', ['biz' => $biz, 'biz_form' => $biz_form]);
 	}
 	public function search()
 	{
@@ -264,8 +264,8 @@ class Home extends BaseController
 		$customer = [
 			'customer_full_name' => $customer_full_name,
 			'customer_signin_name' => $customer_signin_name,
-			'customer_password' => $customer_password
-					];
+			'customer_password' => password_hash($customer_password, PASSWORD_BCRYPT)
+		];
 		$this->db->table('customers')->insert($customer);
 		$customer_id = $this->db->insertID();
 
@@ -286,13 +286,15 @@ class Home extends BaseController
 			FILTER_SANITIZE_STRING
 		);
 
-		$biz = ['customer_biz_name' => $customer_biz_name];
+		$biz = [
+			'customer_biz_name' => $customer_biz_name,
+			'customer_id' => $customer_id
+		];
 		$this->db->table('customer_biz')->insert($biz);
 		$customer_biz_id = $this->db->insertID();
 
 		return redirect()
 			->to('/home/customer_biz?customer_biz_id=' . $customer_biz_id);
-
 	}
 
 	public function no_of_biz()
@@ -317,7 +319,7 @@ class Home extends BaseController
 			'biz_screen_name',
 			FILTER_SANITIZE_STRING
 		);
-		$screen_name = ['biz_screen_name'=>$biz_screen_name];
+		$screen_name = ['biz_screen_name' => $biz_screen_name];
 		$this->db->table('biz_screen')->insert($screen_name);
 
 		$biz_screen_id = filter_input(

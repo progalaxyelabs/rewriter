@@ -185,7 +185,7 @@ class Queries
         cb.customer_biz_id,
         cb.customer_biz_name
         from customers c
-        join customer_biz cb on cb.customer_id = c.customer_id
+        left join customer_biz cb on cb.customer_id = c.customer_id
         where c.customer_id = ?;
     ";
 
