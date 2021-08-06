@@ -268,23 +268,17 @@ class Home extends BaseController
 			'customer_password',
 			FILTER_SANITIZE_STRING
 		);
-		/*$customer_biz_name = filter_input(
-			INPUT_POST,
-			'customer_biz_name',
-			FILTER_SANITIZE_STRING
-		);*/
 
 		$customer = [
 			'customer_full_name' => $customer_full_name,
 			'customer_signin_name' => $customer_signin_name,
-			'customer_password' => $customer_password,
-			//'customer_biz_name' => $customer_biz_name
+			'customer_password' => $customer_password
 					];
 		$this->db->table('customers')->insert($customer);
 		$customer_id = $this->db->insertID();
 
 		return redirect()
-			->to('/home/new_customer_submit?customer_id=' . $customer_id);
+			->to('/home/no_of_biz?customer_id=' . $customer_id);
 	}
 
 	public function no_of_biz()

@@ -20,6 +20,7 @@
             <div>
                 <label>Full name</label>
                 <input type="text" class="form-control" name="customer_full_name">
+                <?= csrf_field() ?>
             </div>
             <div>
                 <label>Bussiness name</label>
