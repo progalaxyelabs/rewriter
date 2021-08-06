@@ -16,28 +16,28 @@
     <div class="row">
         <div class="col-md-4 offset-md-4">
 
-        <form action="">
+        <form method="post" action="/home/new_customer_submit">
             <div>
                 <label>Full name</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="customer_full_name">
             </div>
             <div>
                 <label>Bussiness name</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="customer_biz_name">
             </div>
             <div>
                 <label>Signin name</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="customer_signin_name">
             </div>
             <div>
                 <label>Create Password</label>
-                <input type="password" class="form-control">
+                <input type="password" class="form-control" name="customer_password">
             </div>
             <div class="text-center" style="margin-top: 15px;">
-                <a href="/home/new_customer_submit" class="btn btn-primary" role="button">Save</a>
+                <button type="submit" class="btn btn-primary" role="button">Save</button>
             </div>
             <div style="margin-top:20px;" class="text-center">
-                <span>Existing customer? <a href="" style="text-decoration: none;">Click Here...</a></span>
+                <span>Existing customer? <a href="/home/search" style="text-decoration: none;">Click Here...</a></span>
 
             </div>
         </form>

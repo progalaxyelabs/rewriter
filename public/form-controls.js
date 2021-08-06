@@ -118,7 +118,8 @@ class OptionsFormControl extends BootstrapFormControl {
         let select = this.createElement('select', {
             className: 'form-select'
         })
-
+        let option = this.createElement('option',{innerHTML:"Select from below"})
+        select.appendChild(option)
         for (let item in this.controlDefinition.list) {
             let option = this.createElement('option', {
                 innerHTML: this.controlDefinition.list[item]

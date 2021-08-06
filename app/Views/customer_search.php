@@ -22,7 +22,7 @@
     <div class="row">
         <?php if ($customer) : ?>
         <div class="col-md-4 offset-md-4 text-center">
-            <a class="template-preview-link" href="/home/customer?customer_id=<?= $customer->customer_id ?>">
+            <a class="template-preview-link" href="/home/no_of_biz?customer_id=<?= $customer->customer_id ?>">
                 <div class="btn btn-secondary" id="temporary-customer-names">
                     <?= $customer->customer_full_name ?>
                 </div>

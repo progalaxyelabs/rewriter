@@ -166,4 +166,59 @@ class Queries
         from biz_forms
         where biz_screen_id = ?;
     ";
+
+    const GetBizScreenAndFormNames = "
+    select
+        bf.biz_form_id,
+        bf.biz_form_name,
+        bs.biz_screen_id,
+        bs.biz_screen_name
+        from biz_forms bf
+        join biz_screens bs on bs.biz_screen_id = bf.biz_screen_id
+        where bf.biz_form_id;
+    ";
+    
+    const GetCustomerBizNameByCustomerId = "
+    select
+        c.customer_id,
+        c.customer_full_name,
+        cb.customer_biz_id,
+        cb.customer_biz_name
+        from customers c
+        join customer_biz cb on cb.customer_id = c.customer_id
+        where c.customer_id = ?;
+    ";
+
+    const GetCustomerBizNameByCustomerBizId = "
+    select
+        c.customer_id,
+        cb.customer_biz_id,
+        cb.customer_biz_name
+        from customers c
+        join customer_biz cb on cb.customer_id = c.customer_id
+        where cb.customer_biz_id = ?;
+    ";
+
+    const GetBizScreenNameByBizScreenId ="
+    select
+        cb.customer_biz_id,
+        bs.biz_screen_name,
+        bs.biz_screen_id
+        from biz_screens bs
+        join customer_biz cb on cb.customer_biz_id = bs.customer_biz_id
+        where bs.biz_screen_id = ?;
+    ";
+
+    const GetBizScreenNameByCustomerBizId = "
+    select
+        c.customer_id,
+        c.customer_full_name,
+        cb.customer_biz_id,
+        cb.customer_biz_name,
+        bs.biz_screen_name
+        from biz_screens bs
+        join customer_biz cb on cb.customer_biz_id = bs.customer_biz_id
+        join customers c on c.customer_id = cb.customer_id
+        where cb.customer_biz_id = ?;
+    ";
 }

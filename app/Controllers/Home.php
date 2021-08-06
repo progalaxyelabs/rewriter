@@ -192,14 +192,50 @@ class Home extends BaseController
 		return view('home_new_customer');
 	}
 
-	public function new_customer_submit()
+	public function customer_biz()
 	{
-		return view('customer');
+		$customer_id = filter_input(
+			INPUT_GET,
+			'customer_id',
+			FILTER_SANITIZE_STRING
+		);
+		$customer_biz_id = filter_input(
+			INPUT_GET,
+			'customer_biz_id',
+			FILTER_SANITIZE_STRING
+		);
+		$biz = $this->db->query(
+			Queries::GetCustomerBizNameByCustomerBizId,
+			[$customer_biz_id]
+		)->getRow();
+		$customer = $this->db->query(
+			Queries::GetCustomerById,
+			[$customer_id]
+		)->getRow();
+		$templates = $this->db->query(
+			Queries::GetAllGenericTemplates
+		)->getResult();
+
+		return view('customer',['customer' => $customer , 'templates' => $templates , 'biz' => $biz]);
 	}
 
 	public function customer_screen()
 	{
-		return view('customer_screen');
+		$biz_screen_id = filter_input(
+			INPUT_GET,
+			'customer_id',
+			FILTER_SANITIZE_STRING
+		);
+		
+		$biz_form = $this->db->query(
+			Queries::GetBizScreenAndFormNames
+		)->getResult();
+		$biz = $this->db->query(
+			Queries::GetBizScreenNameByCustomerBizId,
+			[$biz_screen_id]
+		)->getRow();
+
+		return view('customer_screen', ['biz' => $biz ,'biz_form' => $biz_form ]);
 	}
 	public function search()
 	{
@@ -208,12 +244,85 @@ class Home extends BaseController
 			'customer_id',
 			FILTER_SANITIZE_STRING
 		);
-		log_message('debug', 'customer id is ' . print_r($customer_id, true));
 		$customer = $this->db->query(
 			Queries::GetCustomerById,
 			[$customer_id]
 		)->getRow();
 
-		return view('customer_search', ['customer' => $customer],);
+		return view('customer_search', ['customer' => $customer]);
+	}
+	public function new_customer_submit()
+	{
+		$customer_full_name = filter_input(
+			INPUT_POST,
+			'customer_full_name',
+			FILTER_SANITIZE_STRING
+		);
+		$customer_signin_name = filter_input(
+			INPUT_POST,
+			'customer_signin_name',
+			FILTER_SANITIZE_STRING
+		);
+		$customer_password = filter_input(
+			INPUT_POST,
+			'customer_password',
+			FILTER_SANITIZE_STRING
+		);
+		/*$customer_biz_name = filter_input(
+			INPUT_POST,
+			'customer_biz_name',
+			FILTER_SANITIZE_STRING
+		);*/
+
+		$customer = [
+			'customer_full_name' => $customer_full_name,
+			'customer_signin_name' => $customer_signin_name,
+			'customer_password' => $customer_password,
+			//'customer_biz_name' => $customer_biz_name
+					];
+		$this->db->table('customers')->insert($customer);
+		$customer_id = $this->db->insertID();
+
+		return redirect()
+			->to('/home/new_customer_submit?customer_id=' . $customer_id);
+	}
+
+	public function no_of_biz()
+	{
+		$customer_id = filter_input(
+			INPUT_GET,
+			'customer_id',
+			FILTER_SANITIZE_STRING
+		);
+		$biz = $this->db->query(
+			Queries::GetCustomerBizNameByCustomerId,
+			[$customer_id]
+		)->getResult();
+
+		return view('no_of_biz', ['biz' => $biz]);
+	}
+
+	public function biz_screen_name_submit()
+	{
+		$biz_screen_name = filter_input(
+			INPUT_POST,
+			'biz_screen_name',
+			FILTER_SANITIZE_STRING
+		);
+		$screen_name = ['biz_screen_name'=>$biz_screen_name];
+		$this->db->table('biz_screen')->insert($screen_name);
+
+		$biz_screen_id = filter_input(
+			INPUT_GET,
+			'customer_id',
+			FILTER_SANITIZE_STRING
+		);
+		$biz = $this->db->query(
+			Queries::GetCustomerBizNameByCustomerId,
+			[$biz_screen_id]
+		)->getRow();
+
+		return redirect()
+			->to('/home/customer_screen?customer_id=' . $biz);
 	}
 }

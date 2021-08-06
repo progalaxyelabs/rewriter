@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-4 offset-md-4 text-center">
 
-                <h3 id="template-name">Name:<?= $form->generic_template_name ?></h3>
+                <h3 id="template-name"><?= $form->generic_template_name ?></h3>
                 <h4 id="screen-name">Screen:<?= $form->generic_screen_name ?></h4>
                 <h4 id="screen-name">Form:<?= $form->generic_form_name ?></h4>
 
