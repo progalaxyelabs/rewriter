@@ -194,11 +194,6 @@ class Home extends BaseController
 
 	public function customer_biz()
 	{
-		$customer_id = filter_input(
-			INPUT_GET,
-			'customer_id',
-			FILTER_SANITIZE_STRING
-		);
 		$customer_biz_id = filter_input(
 			INPUT_GET,
 			'customer_biz_id',
@@ -208,15 +203,12 @@ class Home extends BaseController
 			Queries::GetCustomerBizNameByCustomerBizId,
 			[$customer_biz_id]
 		)->getRow();
-		$customer = $this->db->query(
-			Queries::GetCustomerById,
-			[$customer_id]
-		)->getRow();
+		
 		$templates = $this->db->query(
 			Queries::GetAllGenericTemplates
 		)->getResult();
 
-		return view('customer',['customer' => $customer , 'templates' => $templates , 'biz' => $biz]);
+		return view('customer',[ 'templates' => $templates , 'biz' => $biz]);
 	}
 
 	public function customer_screen()
@@ -279,6 +271,28 @@ class Home extends BaseController
 
 		return redirect()
 			->to('/home/no_of_biz?customer_id=' . $customer_id);
+	}
+
+	public function new_customer_biz_submit()
+	{
+		$customer_biz_name = filter_input(
+			INPUT_POST,
+			'customer_biz_name',
+			FILTER_SANITIZE_STRING
+		);
+		$customer_id = filter_input(
+			INPUT_POST,
+			'customer_id',
+			FILTER_SANITIZE_STRING
+		);
+
+		$biz = ['customer_biz_name' => $customer_biz_name];
+		$this->db->table('customer_biz')->insert($biz);
+		$customer_biz_id = $this->db->insertID();
+
+		return redirect()
+			->to('/home/customer_biz?customer_biz_id=' . $customer_biz_id);
+
 	}
 
 	public function no_of_biz()

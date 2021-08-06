@@ -21,4 +21,26 @@
     </div>
 </div>
 
+<div class="modal fade" id="exampleModalForAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">New Business Name</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<form method="post" action="/home/new_customer_biz_submit">
+						<div class="modal-body">
+							<label for="modal">Name:</label>
+							<input class="form-control" id="modalinput" type="text" name="customer_biz_name">
+                            <input type="hidden" name="customer_id" value="<?= $biz[0]-> customer_id ?>">
+						</div>
+						<div class="modal-footer">
+							<button id="ok" type="submit" class="btn btn-primary">Ok</button>
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
 <?= $this->endSection() ?>
